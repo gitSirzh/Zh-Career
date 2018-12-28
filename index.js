@@ -1,3 +1,9 @@
+/**
+ * Sample React Native
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import { AppRegistry } from 'react-native';
 
 // @todo remove when RN upstream is fixed

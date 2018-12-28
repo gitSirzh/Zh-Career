@@ -3,6 +3,9 @@
  */
 
 /** 公共样式表 **/
+/**
+ * Created by jszh on 2018/12/27.
+ */
 
 import {Platform} from 'react-native'
 import deviceInfo from './deviceInfo'
