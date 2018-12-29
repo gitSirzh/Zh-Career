@@ -28,7 +28,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: 'red',
+        backgroundColor: '#FFEBCD',
     },
 
 });

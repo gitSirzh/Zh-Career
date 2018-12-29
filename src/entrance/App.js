@@ -20,14 +20,178 @@ import {commonStyle} from '../utils/index_utils'
 /**============路由页============**/
 import TabBar from './TabBar'
 
+/**============组件页============**/
+import Loading from '../utils/progressHUD/progressHUD'
 
-type Props = {};
-export default class App extends Component<Props> {
+import Launch from '../components/pages/demoPage/Launch'
+import Error from '../components/pages/demoPage/Error'
+import Mask from '../components/pages/demoPage/Mask'
+import ModalView from '../components/pages/demoPage/ModalView'
+import Login from '../components/pages/demoPage/Login'
+import Login2 from '../components/pages/demoPage/Login2'
+import Login3 from '../components/pages/demoPage/Login3'
+
+import MessageBar from "../utils/messageBar/MessageBar"
+
+//创建stateReducer
+const reducerCreate = params => {
+    const defaultReducer = new Reducer(params)
+    return (state, action) => {
+        action.type !== type.REACT_NATIVE_ROUTER_FLUX_SET_PARAMS ? dispatch(state)(action) : null
+        return defaultReducer(state, action)
+    }
+}
+
+//获取SceneStyle
+const getSceneStyle = () => ({
+    backgroundColor: "white",
+    shadowOpacity: 1,
+    shadowRadius: 3,
+});
+
+//
+const scenes = Actions.create(
+    <Scene key="root">
+        <Modal key="modal" hideNavBar>
+            <Lightbox key="lightbox" hideNavBar={true}>
+
+                <Stack key="init" back>
+                    <Scene key="launch" component={Launch} hideNavBar />
+
+                    <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
+
+                    {/*<Scene key="picDetail" hideNavBar component={connect(*/}
+                        {/*(state) => state.picture.picList,*/}
+                        {/*Action.dispatch('picture')*/}
+                    {/*)(PicDetail)}/>*/}
+
+                    {/*<Scene key="pastList"*/}
+                           {/*navigationBarStyle={{backgroundColor: commonStyle.white}}*/}
+                           {/*component={connect(*/}
+                               {/*(state) => state.picture.picList,*/}
+                               {/*Action.dispatch('picture')*/}
+                           {/*)(PastList)}/>*/}
+
+
+                    {/*/!** ############### demo组件 ############### **!/*/}
+
+                    {/*<Scene key="demoPage" title="Demo集合" hideNavBar component={DemoPage}/>*/}
+
+                    {/*<Scene key="register" title="Register" component={Register}/>*/}
+
+                    {/*<Scene key="register2" title="Register2" component={Register}/>*/}
+
+                    {/*<Scene key="pageOne" hideNavBar component={PageOne}/>*/}
+
+                    {/*<Scene key="pageTwo" component={PageTwo}/>*/}
+
+                    {/*<Scene key="echo" clone component={EchoView}*/}
+                           {/*getTitle={({navigation}) => navigation.state.key}/>*/}
+
+                    {/*<Scene key="enhancedListView" title ='测试ListView' component={connect(*/}
+                        {/*(state) => state.movie.movieList,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(EnhancedListViewTest)}/>*/}
+
+                    {/*<Scene key="blur" title="blur" component={Blur}/>*/}
+
+                    {/*<Scene key="testMessageBar" title="testMessageBar" component={TestMessageBar}/>*/}
+
+                    {/*<Scene key="testAntdMobile" title="testAntdMobile" component={TestAntdMobile}/>*/}
+
+                    {/*<Scene key="testOrientation" title="testOrientation" component={TestOrientation}/>*/}
+
+                    {/*<Scene key='SwiperComp' title='Swiper' component={SwiperComp}/>*/}
+
+                    {/*<Scene key='imgZoom' title='ImgZoom' component={ImgZoom}/>*/}
+
+                    {/*<Scene key='testIcon' title='TestIcon' component={TestIcon}/>*/}
+
+                    {/*<Scene key='testScrollableTabView' title='TestScrollableTabView' component={TestScrollableTabView}/>*/}
+
+                    {/*<Scene key='testViewPager' title='TestViewPager' component={TestViewPager}/>*/}
+
+                    {/*<Scene key="testRedux" component={TestRedux}*/}
+                           {/*title="Replace"*/}
+                           {/*type={ActionConst.REPLACE}/>*/}
+
+                    {/*<Scene key="testLogDot" title='testLogDot' component={TestLogDot}/>*/}
+
+                    {/*<Scene key="network" title='网络请求' component={*/}
+                        {/*connect(*/}
+                            {/*(state) => state.find.chat,*/}
+                            {/*Action.dispatch('openChat')*/}
+                        {/*)(Network)}/>*/}
+
+                    {/*<Scene key="customComp" title='包装原生组件' component={CustomComp}/>*/}
+
+                </Stack>
+
+                <Scene key='loading' component={connect(
+                    (state) => state.common.loading
+                )(Loading)}/>
+                <Scene key="error" component={Error}/>
+                <Scene key="mask" component={Mask}/>
+
+            </Lightbox>
+
+            {/*主要*/}
+            <Stack key="modalRoot" back>
+                <Scene key="modalView" component={ModalView}/>
+            </Stack>
+
+            <Stack key="login" titleStyle={{alignSelf: "center"}}>
+                <Scene component={Login} title="Login"
+                       key="loginModal"
+                       onExit={() => console.log("onExit")}
+                       leftTitle="Cancel" onLeft={Actions.pop}/>
+                <Scene
+                    key="loginModal2"
+                    component={Login2}
+                    title="Login2"
+                    backTitle="Back"
+                    panHandlers={null}
+                    duration={1}/>
+                <Scene
+                    key="loginModal3"
+                    hideNavBar
+                    component={Login3}
+                    title="Login3"
+                    panHandlers={null}
+                    duration={1}/>
+            </Stack>
+        </Modal>
+    </Scene>
+)
+
+
+
+
+//创建 App
+class App extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <TabBar/>
+                <Router
+                    scenes={scenes}
+                    createReducer={reducerCreate}
+                    tintColor='white'
+                    getSceneStyle={getSceneStyle}
+                />
+                <MessageBar />
             </View>
-        );
+        )
     }
 }
+
+//创建 store
+const initApp = () => {
+    return (
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    )
+}
+
+//导出App
+export default initApp

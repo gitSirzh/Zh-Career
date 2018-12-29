@@ -28,7 +28,7 @@ class Music extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#E6E6FA',
     },
 
 });

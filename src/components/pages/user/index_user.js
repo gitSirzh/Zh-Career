@@ -28,7 +28,7 @@ class User extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#FFE4E1',
     },
 
 });

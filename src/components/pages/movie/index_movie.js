@@ -28,7 +28,7 @@ class Movie extends Component {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: 'blue',
+        backgroundColor: '#FFF5EE',
     },
 
 });
