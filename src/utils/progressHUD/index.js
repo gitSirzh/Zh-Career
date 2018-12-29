@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/10.
+ * Created by jszh on 2018/12/29.
  */
 import React from 'react'
 import ProgressHUD from './progressHUD'
@@ -8,9 +8,9 @@ import type from '../../constants/actionType'
 import {createAction} from 'redux-actions'
 import {Actions} from 'react-native-router-flux'
 
-const loadingAction = createAction(type.FETCH_SHOW_HUD)
+const loadingAction = createAction(type.FETCH_SHOW_HUD);
 
-let sibling = undefined
+let sibling = undefined;
 
 const ShowProgress = {
   show: () => {
@@ -21,19 +21,19 @@ const ShowProgress = {
       sibling.destroy()
     }
   }
-}
+};
 
 const RootHUD = {
   show: () => {
-    let currentStatus = store.getState().common.loading.showHUD
+    let currentStatus = store.getState().common.loading.showHUD;
     if (!currentStatus) {
-      Actions.loading()
+      Actions.loading();
       store.dispatch(loadingAction(true))
     }
   },
   hidden: () => {
     store.dispatch(loadingAction(false))
   }
-}
+};
 
 export {RootHUD}

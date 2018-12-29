@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/10.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {View, StyleSheet, ActivityIndicator} from 'react-native'

@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/8/22.
+ * Created by jszh on 2018/12/29.
  */
 import {bindActionCreators}  from 'redux'
 import openChat from './find/chat'
@@ -22,11 +22,11 @@ const action = {
   me,
   login,
   register
-}
+};
 
 const dispatch = name => dispatch => {
   if (Array.isArray(name)) {
-    let tempActionCreators = {}
+    let tempActionCreators = {};
     for (let i = 0; i < name.length; i++) {
       Object.assign(tempActionCreators, action[name[i]].actionCreators)
     }
@@ -34,6 +34,6 @@ const dispatch = name => dispatch => {
   } else {
     return bindActionCreators(action[name].actionCreators, dispatch)
   }
-}
+};
 
 export default {dispatch}

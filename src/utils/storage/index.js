@@ -1,11 +1,11 @@
 /**
- * Created by guangqiang on 2017/11/15.
+ * Created by jszh on 2018/12/27.
  */
 import {AsyncStorage} from 'react-native'
 import Storage from 'react-native-storage'
 import {sync} from './sync'
 
-let storage = undefined
+let storage = undefined;
 let defaultExpires = 1000 * 3600 * 24
 let size = 1000
 

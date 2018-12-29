@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/11/15.
+ * Created by jszh on 2018/12/29.
  */
 import {storage} from './index'
 

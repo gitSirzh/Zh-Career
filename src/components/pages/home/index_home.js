@@ -3,10 +3,12 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, View} from 'react-native'
+
+
 class Home extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
 
         }

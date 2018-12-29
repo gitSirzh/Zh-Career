@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/8/26.
+ * Created by jszh on 2018/12/29.
  */
 
 /** 网络请求工具类的拓展类，便于后期网络层修改维护 **/

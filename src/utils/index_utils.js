@@ -6,12 +6,12 @@ import deviceInfo from './deviceInfo'
 import {commonStyle} from './commonStyle'
 import {RegExpr} from './regUtil'
 // import {ArrayTool} from './arrayExtension'
-// import {storage} from './storage'
+import {storage} from './storage'
 // import {Icon} from './icon_Discard'
 import {Toast} from './toast'
 import {deepClone} from './deepClone'
-// import {extraUtil} from './extraUtils'
+import {extraUtil} from './extraUtils'
 
 
 // export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast, deepClone, extraUtil}
-export {deviceInfo,RegExpr,deepClone, commonStyle,Toast}
+export {deviceInfo,extraUtil,storage,RegExpr,deepClone, commonStyle,Toast}

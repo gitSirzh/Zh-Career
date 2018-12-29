@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/8/27.
+ * Created by jszh on 2018/12/29.
  */
 
 /** 获取用户信息工具类 **/

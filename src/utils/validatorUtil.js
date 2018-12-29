@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/18.
+ * Created by jszh on 2018/12/29.
  */
 
 function ValidateUtil(validateArray) {

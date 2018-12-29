@@ -33,7 +33,7 @@ const PATH = {
   READING_ESSAY_DETAIL: '/essay/',
   READING_SERIAL_DETAIL: '/serialcontent/',
   READING_QUESTION_DETAIL: '/question/',
-  READING_COMMENT_LIST: '/comment/praiseandtime/',
+  READING_COMMENT_LIST: '/palyComment/praiseandtime/',
   READING_ARTICLE_CATE_LIST: '/bymonth/',
 
   // 获取find模块数据

@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/8/26.
+ * Created by jszh on 2018/12/29.
  */
 
 /** 基于fetch 封装的网络请求工具类 **/

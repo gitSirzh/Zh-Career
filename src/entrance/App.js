@@ -14,9 +14,6 @@ import {dispatch} from '../utils/allLog/dispatchLog'
 import type from '../constants/actionType'
 import {commonStyle} from '../utils/index_utils'
 
-/**============action============**/
-
-
 /**============路由页============**/
 import TabBar from './TabBar'
 
@@ -30,6 +27,22 @@ import ModalView from '../components/pages/demoPage/ModalView'
 import Login from '../components/pages/demoPage/Login'
 import Login2 from '../components/pages/demoPage/Login2'
 import Login3 from '../components/pages/demoPage/Login3'
+
+/**============action============**/
+/**============首页============**/
+
+/**============音乐============**/
+
+/**============电影============**/
+import MovieDetail from '../components/pages/movie/movieDetail'
+// import MoviePlayer from '../components/pages/movie/moviePlayer'
+// import TrailerList from '../components/pages/movie/movieTrailerList'
+// import MiniCommentList from '../components/pages/movie/comment/miniCommentList'
+// import PlusCommentList from '../components/pages/movie/comment/plusCommentList'
+// import ActorList from '../components/pages/movie/actor/actorList'
+// import PictureList from '../components/pages/movie/picture/pictureList'
+
+/**============我的============**/
 
 import MessageBar from "../utils/messageBar/MessageBar"
 
@@ -60,17 +73,52 @@ const scenes = Actions.create(
 
                     <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
 
-                    {/*<Scene key="picDetail" hideNavBar component={connect(*/}
-                        {/*(state) => state.picture.picList,*/}
-                        {/*Action.dispatch('picture')*/}
-                    {/*)(PicDetail)}/>*/}
+                    {/*================首页================*/}
 
-                    {/*<Scene key="pastList"*/}
-                           {/*navigationBarStyle={{backgroundColor: commonStyle.white}}*/}
-                           {/*component={connect(*/}
-                               {/*(state) => state.picture.picList,*/}
-                               {/*Action.dispatch('picture')*/}
-                           {/*)(PastList)}/>*/}
+                    {/*================音乐================*/}
+
+                    {/*================电影================*/}
+                    <Scene key="movieDetail" hideNavBar component={connect(
+                        (state) => state.movie.movieDetail,
+                        Action.dispatch('movie')
+                    )(MovieDetail)}/>
+                    {/*<Scene key="moviePlayer" hideNavBar component={connect(*/}
+                        {/*(state) => state.movie.movieList,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(MoviePlayer)}/>*/}
+
+                    {/*<Scene key="trailerList" hideNavBar component={connect(*/}
+                        {/*(state) => state.movie.movieList,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(TrailerList)}/>*/}
+
+                    {/*<Scene key="miniComment" hideNavBar component={connect(*/}
+                        {/*(state) => state.movie.commentList,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(MiniCommentList)}/>*/}
+
+                    {/*<Scene key="plusComment" hideNavBar component={connect(*/}
+                        {/*(state) => state.movie.commentList,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(PlusCommentList)}/>*/}
+
+                    {/*<Scene key="actorList" hideNavBar  component={connect(*/}
+                        {/*(state) => state.movie.actor,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(ActorList)}/>*/}
+
+                    {/*<Scene key="pictureList" hideNavBar component={connect(*/}
+                        {/*state => state.movie.picture,*/}
+                        {/*Action.dispatch('movie')*/}
+                    {/*)(PictureList)}/>*/}
+                    {/*================我的================*/}
+
+
+
+
+
+
+
 
 
                     {/*/!** ############### demo组件 ############### **!/*/}
