@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/8/30.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {Text, StyleSheet} from 'react-native'

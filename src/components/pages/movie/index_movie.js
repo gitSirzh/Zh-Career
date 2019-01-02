@@ -37,7 +37,7 @@ class Movie extends Component {
 
     onValueChange = (value) => {
         this.setState({selectedTab: value})
-    }
+    };
 
 
     render() {

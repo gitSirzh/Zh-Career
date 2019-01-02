@@ -28,6 +28,8 @@ import Login from '../components/pages/demoPage/Login'
 import Login2 from '../components/pages/demoPage/Login2'
 import Login3 from '../components/pages/demoPage/Login3'
 
+import WebView from '../components/common/webView'
+
 /**============action============**/
 /**============首页============**/
 
@@ -35,12 +37,12 @@ import Login3 from '../components/pages/demoPage/Login3'
 
 /**============电影============**/
 import MovieDetail from '../components/pages/movie/movieDetail'
-// import MoviePlayer from '../components/pages/movie/moviePlayer'
-// import TrailerList from '../components/pages/movie/movieTrailerList'
+import MoviePlayer from '../components/pages/movie/moviePlayer'
+import TrailerList from '../components/pages/movie/movieTrailerList'
 // import MiniCommentList from '../components/pages/movie/comment/miniCommentList'
 // import PlusCommentList from '../components/pages/movie/comment/plusCommentList'
-// import ActorList from '../components/pages/movie/actor/actorList'
-// import PictureList from '../components/pages/movie/picture/pictureList'
+import ActorList from '../components/pages/movie/actor/actorList'
+import PictureList from '../components/pages/movie/picture/pictureList'
 
 /**============我的============**/
 
@@ -82,15 +84,28 @@ const scenes = Actions.create(
                         (state) => state.movie.movieDetail,
                         Action.dispatch('movie')
                     )(MovieDetail)}/>
-                    {/*<Scene key="moviePlayer" hideNavBar component={connect(*/}
-                        {/*(state) => state.movie.movieList,*/}
-                        {/*Action.dispatch('movie')*/}
-                    {/*)(MoviePlayer)}/>*/}
+                    {/*播放视频*/}
+                    <Scene key="moviePlayer" hideNavBar component={connect(
+                        (state) => state.movie.movieList,
+                        Action.dispatch('movie')
+                    )(MoviePlayer)}/>
+                    {/*视频列表*/}
+                    <Scene key="trailerList" hideNavBar component={connect(
+                        (state) => state.movie.movieList,
+                        Action.dispatch('movie')
+                    )(TrailerList)}/>
+                    {/*演员列表*/}
+                    <Scene key="actorList" hideNavBar  component={connect(
+                        (state) => state.movie.actor,
+                        Action.dispatch('movie')
+                    )(ActorList)}/>
+                    {/*电影海报图片*/}
+                    <Scene key="pictureList" hideNavBar component={connect(
+                        state => state.movie.picture,
+                        Action.dispatch('movie')
+                    )(PictureList)}/>
 
-                    {/*<Scene key="trailerList" hideNavBar component={connect(*/}
-                        {/*(state) => state.movie.movieList,*/}
-                        {/*Action.dispatch('movie')*/}
-                    {/*)(TrailerList)}/>*/}
+                    <Scene key="webView" hideNavBar component={WebView}/>
 
                     {/*<Scene key="miniComment" hideNavBar component={connect(*/}
                         {/*(state) => state.movie.commentList,*/}
@@ -102,15 +117,7 @@ const scenes = Actions.create(
                         {/*Action.dispatch('movie')*/}
                     {/*)(PlusCommentList)}/>*/}
 
-                    {/*<Scene key="actorList" hideNavBar  component={connect(*/}
-                        {/*(state) => state.movie.actor,*/}
-                        {/*Action.dispatch('movie')*/}
-                    {/*)(ActorList)}/>*/}
 
-                    {/*<Scene key="pictureList" hideNavBar component={connect(*/}
-                        {/*state => state.movie.picture,*/}
-                        {/*Action.dispatch('movie')*/}
-                    {/*)(PictureList)}/>*/}
                     {/*================我的================*/}
 
 

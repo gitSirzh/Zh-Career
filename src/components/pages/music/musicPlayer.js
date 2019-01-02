@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/9.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Image, Slider, Animated, Easing, Platform, findNodeHandle, NativeModules} from 'react-native'
@@ -207,7 +207,7 @@ export default class MusicPlayer extends Component {
               style={{marginTop: 5}}
               onPress={() => Actions.pop()}
             >
-              <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
+              <Icon name={'ios-arrow-back'} size={20} color={commonStyle.white}/>
             </TouchableOpacity>
             <View style={{alignItems: 'center'}}>
               <Text style={styles.title}>{musicInfo.title}</Text>

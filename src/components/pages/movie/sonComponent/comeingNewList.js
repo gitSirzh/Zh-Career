@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/10/5.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {View, ListView, Image, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native'

@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/8/27.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {View, StyleSheet} from 'react-native'
@@ -9,11 +9,11 @@ import {Actions} from "react-native-router-flux"
 class BaseComponent extends Component {
 
   constructor(props) {
-    super(props)
-    this.navigationBarProps = this.navigationBarProps.bind(this)
-    this._render = this._render.bind(this)
-    this.onLeftPress = this.onLeftPress.bind(this)
-    this.onRightPress = this.onRightPress.bind(this)
+    super(props);
+    this.navigationBarProps = this.navigationBarProps.bind(this);
+    this._render = this._render.bind(this);
+    this.onLeftPress = this.onLeftPress.bind(this);
+    this.onRightPress = this.onRightPress.bind(this);
   }
 
   navigationBarProps() {

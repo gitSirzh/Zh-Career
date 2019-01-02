@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/15.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component, PropTypes} from 'react'
 import {View, Text, RefreshControl, ListView, ActivityIndicator} from '../index'

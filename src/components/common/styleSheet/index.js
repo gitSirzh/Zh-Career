@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/10/16.
+ * Created by jszh on 2018/12/29.
  */
 import React, { StyleSheet, Platform } from 'react-native'
 

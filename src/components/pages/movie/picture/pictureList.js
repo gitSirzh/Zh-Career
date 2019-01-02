@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/10/11.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {commonStyle} from '../../../../utils/commonStyle'
@@ -22,8 +22,8 @@ export default class PictureList extends BaseComponent {
         color: commonStyle.white
       },
       leftIcon: {
-        name: 'nav_back_o',
-        size: 20,
+        name: 'ios-arrow-back',
+        size: 26,
         color: commonStyle.white
       },
       navBarStyle: {
@@ -38,30 +38,30 @@ export default class PictureList extends BaseComponent {
   }
 
   renderGridList() {
-    let picArr = this.props.pictureArr
-    let typeArr = this.props.pictureType
-    let compArr = []
+    let picArr = this.props.pictureArr;
+    let typeArr = this.props.pictureType;
+    let compArr = [];
     for (let i = 0; i < typeArr.length; i ++) {
-      let type = typeArr[i]
-      let tempArr = []
+      let type = typeArr[i];
+      let tempArr = [];
 
       if (type.type === -1) {
         tempArr = picArr.map((data, index) => {
-          let item = {}
-          item.key = data.id
-          item.data = data
+          let item = {};
+          item.key = data.id;
+          item.data = data;
           return item
-        })
+        });
         compArr.push(<PictureGrid key={i} data={tempArr} tabLabel={type.typeName}/>)
         continue
       }
 
       for (let j = 0; j < picArr.length; j ++) {
-        let pic = picArr[j]
+        let pic = picArr[j];
         if (type.type === pic.type) {
-          let item = {}
-          item.key = pic.id
-          item.data = pic
+          let item = {};
+          item.key = pic.id;
+          item.data = pic;
           tempArr.push(item)
         }
       }
@@ -71,7 +71,7 @@ export default class PictureList extends BaseComponent {
   }
 
   _render() {
-    let picArr = this.props.pictureArr
+    let picArr = this.props.pictureArr;
     return (
       picArr.length ?
         <ScrollableTabView

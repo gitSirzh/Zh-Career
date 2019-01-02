@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/10/5.
+ * Created by jszh on 2018/12/29.
  */
 
 import React, {Component} from 'react'
@@ -22,7 +22,7 @@ export default class ComeingNewCell extends Component {
             source={{uri: data.image}}
           />
           <View style={{position: commonStyle.absolute}}>
-            <Icon name={'play_cycle_o'} size={25} color={commonStyle.white}/>
+            <Icon name={'ios-play'} size={25} color={commonStyle.white}/>
           </View>
         </TouchableOpacity>
         <View style={styles.rightContent}>

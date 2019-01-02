@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/6.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {StyleSheet, View, WebView} from 'react-native'
@@ -17,8 +17,8 @@ export default class CustomWebView extends BaseComponent {
         color: commonStyle.white
       },
       leftIcon: {
-        name: 'nav_back_o',
-        size: 20,
+        name: 'ios-arrow-back',
+        size: 26,
         color: commonStyle.white
       },
       navBarStyle: {
@@ -28,7 +28,7 @@ export default class CustomWebView extends BaseComponent {
   }
 
   _render() {
-    const {url} = this.props
+    const {url} = this.props;
     return (
       <View style={styles.container}>
         <WebView

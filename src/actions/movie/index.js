@@ -31,6 +31,6 @@ const actionCreators = {
   getTrailerList,
   getActorList,
   getPictureList,
-}
+};
 
 export default {actionCreators}

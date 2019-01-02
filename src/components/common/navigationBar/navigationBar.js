@@ -1,10 +1,11 @@
 /**
- * Created by guangqiang on 2017/8/27.
+ * Created by jszh on 2018/12/29.
+ * 封装下 navbar
  */
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 const barBtnWidth = 40;
 const defaultNavigationBarProps = {
   hiddenNav: false,
@@ -16,28 +17,28 @@ const defaultNavigationBarProps = {
  * NavigationBar 配置项
  * @type {{navigationBarProps: (*), onLeftPress: *, onRightPress: *, hiddenNav: (*), navBarStyle, navContentStyle, hiddenLeftItem: (*), leftIcon, leftTitle, leftTitleStyle, leftItemStyle, titleStyle, title, subTitleStyle, subTitle, hiddenRightItem: (*), rightIcon, rightTitle, rightTitleStyle, rightItemStyle}}
  */
-const navBarConfig = {
-  navigationBarProps: PropTypes.Object,
-  onLeftPress: PropTypes.fun,
-  onRightPress: PropTypes.fun,
-  hiddenNav: PropTypes.bool,
-  navBarStyle: PropTypes.Object,
-  navContentStyle: PropTypes.Object,
-  hiddenLeftItem: PropTypes.bool,
-  leftIcon: PropTypes.Object,
-  leftTitle: PropTypes.string,
-  leftTitleStyle: PropTypes.Object,
-  leftItemStyle: PropTypes.Object,
-  titleStyle: PropTypes.Object,
-  title: PropTypes.string,
-  subTitleStyle: PropTypes.Object,
-  subTitle: PropTypes.string,
-  hiddenRightItem: PropTypes.bool,
-  rightIcon: PropTypes.Object,
-  rightTitle: PropTypes.string,
-  rightTitleStyle: PropTypes.Object,
-  rightItemStyle: PropTypes.Object
-}
+// const navBarConfig = {
+//   navigationBarProps: PropTypes.Object,
+//   onLeftPress: PropTypes.fun,
+//   onRightPress: PropTypes.fun,
+//   hiddenNav: PropTypes.bool,
+//   navBarStyle: PropTypes.Object,
+//   navContentStyle: PropTypes.Object,
+//   hiddenLeftItem: PropTypes.bool,
+//   leftIcon: PropTypes.Object,
+//   leftTitle: PropTypes.string,
+//   leftTitleStyle: PropTypes.Object,
+//   leftItemStyle: PropTypes.Object,
+//   titleStyle: PropTypes.Object,
+//   title: PropTypes.string,
+//   subTitleStyle: PropTypes.Object,
+//   subTitle: PropTypes.string,
+//   hiddenRightItem: PropTypes.bool,
+//   rightIcon: PropTypes.Object,
+//   rightTitle: PropTypes.string,
+//   rightTitleStyle: PropTypes.Object,
+//   rightItemStyle: PropTypes.Object
+// }
 
 export default class NavigationBar extends Component {
 
@@ -59,7 +60,7 @@ export default class NavigationBar extends Component {
     if (this.navigationBarProps.leftIcon) {
       let icon = this.navigationBarProps.leftIcon
       tempComponent = (
-        <Icon name={`oneIcon|${icon.name}`} size={icon.size} color={icon.color}/>
+        <Icon name={`${icon.name}`} size={icon.size} color={icon.color}/>
       )
     } else if (this.navigationBarProps.leftTitle && this.navigationBarProps.leftTitle !== '') {
       tempComponent = (
@@ -67,7 +68,7 @@ export default class NavigationBar extends Component {
       )
     } else {
       tempComponent = (
-        <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.iconGray}/>
+        <Icon name={'ios-arrow-back'} size={26} color={commonStyle.iconGray}/>
       )
     }
     return (
@@ -99,7 +100,7 @@ export default class NavigationBar extends Component {
     if (this.navigationBarProps.rightIcon) {
       let icon = this.navigationBarProps.rightIcon
       tempComponent = (
-        <Icon name={`oneIcon|${icon.name}`} size={icon.size} color={icon.color}/>
+        <Icon name={`${icon.name}`} size={icon.size} color={icon.color}/>
       )
     } else if (this.navigationBarProps.rightTitle && this.navigationBarProps.rightTitle !== '') {
       tempComponent = (

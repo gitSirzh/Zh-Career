@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/9/1.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native'

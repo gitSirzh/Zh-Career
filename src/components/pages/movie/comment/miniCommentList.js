@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/10/10.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {ListView, StyleSheet} from 'react-native'
@@ -23,7 +23,7 @@ export default class MiniCommentList extends BaseComponent {
         color: commonStyle.white
       },
       leftIcon: {
-        name: 'nav_back_o',
+        name: 'ios-arrow-back',
         size: 20,
         color: commonStyle.white
       },

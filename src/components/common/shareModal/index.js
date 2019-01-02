@@ -1,5 +1,5 @@
 /**
- * Created by guangqiang on 2017/11/9.
+ * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
 import {commonStyle} from '../../../utils/commonStyle'
@@ -8,7 +8,8 @@ import {View, TouchableOpacity, Text, StyleSheet, Modal, NativeModules} from 're
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {sharePlatform} from '../../../constants/commonType'
 
-const ShareModule = NativeModules.shareModule
+//原生分享模版
+// const ShareModule = NativeModules.shareModule;
 
 class ShareModal extends Component {
 
@@ -19,22 +20,23 @@ class ShareModal extends Component {
     }
   }
 
-  share(platform) {
-    ShareModule.share('OneM','OneM',
-      'http://www.jianshu.com/u/023338566ca5','http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg', sharePlatform[platform],
-      (message) => {
-        this.props.onVisibleChange && this.props.onVisibleChange(false)
-        this.setState({isHidden: true})
-      })
-  }
+  //调用原生分享
+  // share(platform) {
+  //   ShareModule.share('OneM','OneM',
+  //     'http://www.jianshu.com/u/023338566ca5','http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg', sharePlatform[platform],
+  //     (message) => {
+  //       this.props.onVisibleChange && this.props.onVisibleChange(false)
+  //       this.setState({isHidden: true})
+  //     })
+  // }
 
   renderItem(icon, title, color, platform) {
     return (
       <TouchableOpacity
         style={styles.item}
-        onPress={() => this.share(platform)}
+        onPress={() => alert(title)}
       >
-        <Icon name={`oneIcon|${icon}`} color={color} size={30}/>
+        <Icon name={`${icon}`} color={color} size={30}/>
         <Text style={styles.text}>{title}</Text>
       </TouchableOpacity>
     )
@@ -49,6 +51,7 @@ class ShareModal extends Component {
           visible={this.props.visible}
           onRequestClose={() => this.props.onVisibleChange(false)}>
           <TouchableOpacity
+              activeOpacity={1}
             style={styles.modalStyle}
             onPress={() => this.setState({isHidden: true})}
           >
@@ -59,10 +62,10 @@ class ShareModal extends Component {
               <Text>取消</Text>
             </TouchableOpacity>
             <View style={styles.content}>
-              {this.renderItem('weixin_s', '微信', '#49BF6E', 'WECHAT')}
-              {this.renderItem('weixin_friend_s', '朋友圈', '#49BF6E', 'WECHATMOMENT')}
-              {this.renderItem('qq_s', 'QQ', '#4CC3F0', 'QQ')}
-              {this.renderItem('weibo_s','微博', '#CE3238', 'SINA')}
+              {this.renderItem('weixin', '微信', '#49BF6E', 'WECHAT')}
+              {this.renderItem('github', 'GitHub', '#000000', 'GItHUb')}
+              {this.renderItem('qq', 'QQ', '#4CC3F0', 'QQ')}
+              {this.renderItem('weibo','微博', '#CE3238', 'SINA')}
             </View>
           </TouchableOpacity>
         </Modal> : null
@@ -104,6 +107,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: commonStyle.textBlockColor
   }
-})
+});
 
 export {ShareModal}
