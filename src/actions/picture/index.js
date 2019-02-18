@@ -2,7 +2,7 @@
  * Created by jszh on 2018/12/29.
  */
 
-import { createAction } from 'redux-actions'
+import {createAction} from 'redux-actions'
 import type from '../../constants/actionType'
 import actions from '../../actionCreators/picture'
 
@@ -12,10 +12,10 @@ const getPastList = createAction(type.PICTURE_PAST_LIST, actions.pastList);
 const getGridList = createAction(type.PICTURE_GRID_LIST, actions.picGridList);
 
 const actionCreators = {
-  getPicList,
-  getPicDetail,
-  getPastList,
-  getGridList
-}
+    getPicList,
+    getPicDetail,
+    getPastList,
+    getGridList
+};
 
 export default {actionCreators}

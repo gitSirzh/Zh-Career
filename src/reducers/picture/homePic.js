@@ -6,22 +6,22 @@ import type from '../../constants/actionType'
 import {handleActions} from 'redux-actions'
 
 const initialState = {
-  picList: [],
-  picDetailData: {}
-}
+    picList: [],
+    picDetailData: {}
+};
 
-const originalReducers = {}
+const originalReducers = {};
 
 originalReducers[type.PICTURE_LIST + type.FETCH_SUCCESS_SUFFIX] = (state, action) => ({
-  ...state,
-  picList: action.payload.data
-})
+    ...state,
+    picList: action.payload.data
+});
 
 originalReducers[type.PICTURE_DETAIL + type.FETCH_SUCCESS_SUFFIX] = (state, action) => ({
-  ...state,
-  picDetailData: action.payload.data
-})
+    ...state,
+    picDetailData: action.payload.data
+});
 
-const reducer = handleActions(originalReducers, initialState)
+const reducer = handleActions(originalReducers, initialState);
 
 export default reducer

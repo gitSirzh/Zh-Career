@@ -17,7 +17,7 @@ const middlewares = [
     promiseMiddleware({promiseTypeSuffixes: ['LOADING', 'SUCCESS', 'ERROR']}),
     loggerMiddleware(),
     venilogMiddleware(),
-]
+];
 
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 const store = createStoreWithMiddleware(AppReducers);

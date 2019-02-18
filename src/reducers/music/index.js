@@ -3,8 +3,9 @@
  */
 import {combineReducers} from 'redux'
 import music from './music'
+
 const reducers = combineReducers({
-  music
-})
+    music
+});
 
 export default reducers

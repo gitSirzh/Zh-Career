@@ -19,18 +19,18 @@ const getActorList = createAction(type.MOVIE_ACTOR_LIST, actions.movieActorList)
 const getPictureList = createAction(type.MOVIE_PICTURE_LIST, actions.moviePictureList);
 
 const actionCreators = {
-  getMovieList: params => getMovieList(params),
-  getMovieDetail,
-  getMovieStory,
-  getMovieListForDemo,
-  getMovieShowTimeList,
-  getMovieComeingNewList,
-  getMovieComment,
-  getMiniComment,
-  getPlusComment,
-  getTrailerList,
-  getActorList,
-  getPictureList,
+    getMovieList: params => getMovieList(params),
+    getMovieDetail,
+    getMovieStory,
+    getMovieListForDemo,
+    getMovieShowTimeList,
+    getMovieComeingNewList,
+    getMovieComment,
+    getMiniComment,
+    getPlusComment,
+    getTrailerList,
+    getActorList,
+    getPictureList,
 };
 
 export default {actionCreators}

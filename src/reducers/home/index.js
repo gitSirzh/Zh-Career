@@ -7,7 +7,7 @@ import custom from './custom'
 
 // home 模块的reducer
 const homeReducer = combineReducers({
-  custom
-})
+    custom
+});
 
 export default homeReducer

@@ -3,8 +3,6 @@
  */
 import {createAction} from 'redux-actions'
 
-const actionCreators = {
-
-};
+const actionCreators = {};
 
 export default {actionCreators}

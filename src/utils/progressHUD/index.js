@@ -13,27 +13,27 @@ const loadingAction = createAction(type.FETCH_SHOW_HUD);
 let sibling = undefined;
 
 const ShowProgress = {
-  show: () => {
-    sibling = new RootSiblings(<ProgressHUD />)
-  },
-  hidden: ()=> {
-    if (sibling instanceof RootSiblings) {
-      sibling.destroy()
+    show: () => {
+        sibling = new RootSiblings(<ProgressHUD/>)
+    },
+    hidden: () => {
+        if (sibling instanceof RootSiblings) {
+            sibling.destroy()
+        }
     }
-  }
 };
 
 const RootHUD = {
-  show: () => {
-    let currentStatus = store.getState().common.loading.showHUD;
-    if (!currentStatus) {
-      Actions.loading();
-      store.dispatch(loadingAction(true))
+    show: () => {
+        let currentStatus = store.getState().common.loading.showHUD;
+        if (!currentStatus) {
+            Actions.loading();
+            store.dispatch(loadingAction(true))
+        }
+    },
+    hidden: () => {
+        store.dispatch(loadingAction(false))
     }
-  },
-  hidden: () => {
-    store.dispatch(loadingAction(false))
-  }
 };
 
 export {RootHUD}

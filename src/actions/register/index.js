@@ -8,7 +8,7 @@ import ActionCreator from '../../actionCreators/me'
 const mockRegister = createAction(type.MOVIE_LIST, ActionCreator.register, ActionCreator.registerValidator)
 
 const actionCreators = {
-  mockRegister
-}
+    mockRegister
+};
 
 export default {actionCreators}

@@ -23,33 +23,33 @@ import {dataCache} from '../cache'
  */
 const fetchData = (isCache, requestType) => (url, params, source, callback) => {
 
-  switch (source) {
-    case ApiSource.MIAMIMUSIC:
-      url = `${MIAMI_URL}${url}`
-      break
-    case ApiSource.TIMEMOVIE:
-      url = `${TIME_MOVIE_URL}${url}`
-      break
-    case ApiSource.TIMETICKET:
-      url = `${TIME_TICKET_URL}${url}`
-      break
-    default:
-      url = `${API_URL}${url}`
-      break
-  }
-
-  const fetchFunc = () => {
-    let promise = requestType === 'GET' ? HttpUtils.getRequest(url, params) : HttpUtils.postRequrst(url, params)
-    if (callback && typeof callback === 'function') {
-      promise.then(response => {
-        return callback(response)
-      })
+    switch (source) {
+        case ApiSource.MIAMIMUSIC:
+            url = `${MIAMI_URL}${url}`;
+            break;
+        case ApiSource.TIMEMOVIE:
+            url = `${TIME_MOVIE_URL}${url}`;
+            break;
+        case ApiSource.TIMETICKET:
+            url = `${TIME_TICKET_URL}${url}`;
+            break;
+        default:
+            url = `${API_URL}${url}`;
+            break
     }
-    return promise
-  }
 
-  return dataCache(url, fetchFunc, isCache)
-}
+    const fetchFunc = () => {
+        let promise = requestType === 'GET' ? HttpUtils.getRequest(url, params) : HttpUtils.postRequrst(url, params);
+        if (callback && typeof callback === 'function') {
+            promise.then(response => {
+                return callback(response)
+            })
+        }
+        return promise
+    };
+
+    return dataCache(url, fetchFunc, isCache)
+};
 
 /**
  * GET 请求
@@ -59,7 +59,7 @@ const fetchData = (isCache, requestType) => (url, params, source, callback) => {
  * @param callback
  * @returns {{promise: Promise}}
  */
-const getFetch = fetchData(false, 'GET')
+const getFetch = fetchData(false, 'GET');
 
 /**
  * POST 请求
@@ -68,7 +68,7 @@ const getFetch = fetchData(false, 'GET')
  * @param callback
  * @returns {{promise: Promise}}
  */
-const postFetch = fetchData(false, 'POST')
+const postFetch = fetchData(false, 'POST');
 
 /**
  * GET 请求，带缓存策略
@@ -77,20 +77,20 @@ const postFetch = fetchData(false, 'POST')
  * @param callback
  * @returns {{promise: Promise}}
  */
-const getFetchFromCache = fetchData(true, 'GET')
+const getFetchFromCache = fetchData(true, 'GET');
 
 const postFetchForValidator = (url, params) => {
-  let promise
-  promise = () => {
-    return fetchData(false, 'GET')(url, {})
-  }
-  return {
-    data: params,
-    params,
-    nextPayload: {
-      promise: promise
+    let promise;
+    promise = () => {
+        return fetchData(false, 'GET')(url, {})
+    };
+    return {
+        data: params,
+        params,
+        nextPayload: {
+            promise: promise
+        }
     }
-  }
-}
+};
 
 export {getFetch, postFetch, getFetchFromCache, postFetchForValidator}

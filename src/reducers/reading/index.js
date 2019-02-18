@@ -6,11 +6,12 @@ import reading from './reading'
 import essay from './essay'
 import serial from './serial'
 import question from './question'
+
 const reducers = combineReducers({
-  reading,
-  essay,
-  serial,
-  question
-})
+    reading,
+    essay,
+    serial,
+    question
+});
 
 export default reducers

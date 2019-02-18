@@ -5,8 +5,9 @@
 import {combineReducers} from 'redux'
 
 import picList from './homePic'
+
 const reducer = combineReducers({
-  picList,
-})
+    picList,
+});
 
 export default reducer

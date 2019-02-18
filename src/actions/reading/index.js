@@ -4,6 +4,7 @@
 import action from '../../actionCreators/reading'
 import type from '../../constants/actionType'
 import {createAction} from 'redux-actions'
+
 const getReadingBannerList = createAction(type.READING_BANNER_LIST, action.readingBannerList);
 const getBannerDetail = createAction(type.READING_BANNER_ARTICLE, action.readingBannerDetail);
 const getEssayDetail = createAction(type.READING_ESSAY_DETAIL, action.readingEssayDetail);
@@ -14,14 +15,14 @@ const getArticleCateList = createAction(type.READING_ARTICLE_CATE_LIST, action.r
 const getReadingArticleList = createAction(type.READING_ARTICLE__LIST, action.readingArticleList);
 
 const actionCreators = {
-  getReadingBannerList,
-  getBannerDetail,
-  getEssayDetail,
-  getSearilDetail,
-  getQuestionDetail,
-  getReadingCommentList,
-  getArticleCateList,
-  getReadingArticleList
-}
+    getReadingBannerList,
+    getBannerDetail,
+    getEssayDetail,
+    getSearilDetail,
+    getQuestionDetail,
+    getReadingCommentList,
+    getArticleCateList,
+    getReadingArticleList
+};
 
 export default {actionCreators}

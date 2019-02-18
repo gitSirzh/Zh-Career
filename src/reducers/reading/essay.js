@@ -5,19 +5,19 @@ import {handleActions} from 'redux-actions'
 import type from '../../constants/actionType'
 
 const initialState = {
-  essayDetail: {},
+    essayDetail: {},
 
-}
+};
 
-const actions = {}
+const actions = {};
 
 actions[type.READING_ESSAY_DETAIL + type.FETCH_SUCCESS_SUFFIX] = (state, action) => {
-  return {
-    ...state,
-    essayDetail: action.payload.data
-  }
-}
+    return {
+        ...state,
+        essayDetail: action.payload.data
+    }
+};
 
-const reducer = handleActions(actions, initialState)
+const reducer = handleActions(actions, initialState);
 
 export default reducer

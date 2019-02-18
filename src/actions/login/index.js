@@ -8,7 +8,7 @@ import ActionCreator from '../../actionCreators/me'
 const mockLogin = createAction(type.MOVIE_LIST, ActionCreator.login, ActionCreator.loginValidator);
 
 const actionCreators = {
-  mockLogin
-}
+    mockLogin
+};
 
 export default {actionCreators}

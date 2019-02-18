@@ -14,4 +14,4 @@ import {extraUtil} from './extraUtils'
 
 
 // export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast, deepClone, extraUtil}
-export {deviceInfo,extraUtil,storage,RegExpr,deepClone, commonStyle,Toast}
+export {deviceInfo, extraUtil, storage, RegExpr, deepClone, commonStyle, Toast}

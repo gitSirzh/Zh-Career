@@ -2,7 +2,7 @@
  * Created by jszh on 2018/12/27.
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {View} from "react-native"
 
 /**============状态管理器============**/
@@ -50,12 +50,12 @@ import MessageBar from "../utils/messageBar/MessageBar"
 
 //创建stateReducer
 const reducerCreate = params => {
-    const defaultReducer = new Reducer(params)
+    const defaultReducer = new Reducer(params);
     return (state, action) => {
-        action.type !== type.REACT_NATIVE_ROUTER_FLUX_SET_PARAMS ? dispatch(state)(action) : null
+        action.type !== type.REACT_NATIVE_ROUTER_FLUX_SET_PARAMS ? dispatch(state)(action) : null;
         return defaultReducer(state, action)
     }
-}
+};
 
 //获取SceneStyle
 const getSceneStyle = () => ({
@@ -71,7 +71,7 @@ const scenes = Actions.create(
             <Lightbox key="lightbox" hideNavBar={true}>
 
                 <Stack key="init" back>
-                    <Scene key="launch" component={Launch} hideNavBar />
+                    <Scene key="launch" component={Launch} hideNavBar/>
 
                     <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
 
@@ -95,7 +95,7 @@ const scenes = Actions.create(
                         Action.dispatch('movie')
                     )(TrailerList)}/>
                     {/*演员列表*/}
-                    <Scene key="actorList" hideNavBar  component={connect(
+                    <Scene key="actorList" hideNavBar component={connect(
                         (state) => state.movie.actor,
                         Action.dispatch('movie')
                     )(ActorList)}/>
@@ -108,24 +108,17 @@ const scenes = Actions.create(
                     <Scene key="webView" hideNavBar component={WebView}/>
 
                     {/*<Scene key="miniComment" hideNavBar component={connect(*/}
-                        {/*(state) => state.movie.commentList,*/}
-                        {/*Action.dispatch('movie')*/}
+                    {/*(state) => state.movie.commentList,*/}
+                    {/*Action.dispatch('movie')*/}
                     {/*)(MiniCommentList)}/>*/}
 
                     {/*<Scene key="plusComment" hideNavBar component={connect(*/}
-                        {/*(state) => state.movie.commentList,*/}
-                        {/*Action.dispatch('movie')*/}
+                    {/*(state) => state.movie.commentList,*/}
+                    {/*Action.dispatch('movie')*/}
                     {/*)(PlusCommentList)}/>*/}
 
 
                     {/*================我的================*/}
-
-
-
-
-
-
-
 
 
                     {/*/!** ############### demo组件 ############### **!/*/}
@@ -141,11 +134,11 @@ const scenes = Actions.create(
                     {/*<Scene key="pageTwo" component={PageTwo}/>*/}
 
                     {/*<Scene key="echo" clone component={EchoView}*/}
-                           {/*getTitle={({navigation}) => navigation.state.key}/>*/}
+                    {/*getTitle={({navigation}) => navigation.state.key}/>*/}
 
                     {/*<Scene key="enhancedListView" title ='测试ListView' component={connect(*/}
-                        {/*(state) => state.movie.movieList,*/}
-                        {/*Action.dispatch('movie')*/}
+                    {/*(state) => state.movie.movieList,*/}
+                    {/*Action.dispatch('movie')*/}
                     {/*)(EnhancedListViewTest)}/>*/}
 
                     {/*<Scene key="blur" title="blur" component={Blur}/>*/}
@@ -167,16 +160,16 @@ const scenes = Actions.create(
                     {/*<Scene key='testViewPager' title='TestViewPager' component={TestViewPager}/>*/}
 
                     {/*<Scene key="testRedux" component={TestRedux}*/}
-                           {/*title="Replace"*/}
-                           {/*type={ActionConst.REPLACE}/>*/}
+                    {/*title="Replace"*/}
+                    {/*type={ActionConst.REPLACE}/>*/}
 
                     {/*<Scene key="testLogDot" title='testLogDot' component={TestLogDot}/>*/}
 
                     {/*<Scene key="network" title='网络请求' component={*/}
-                        {/*connect(*/}
-                            {/*(state) => state.find.chat,*/}
-                            {/*Action.dispatch('openChat')*/}
-                        {/*)(Network)}/>*/}
+                    {/*connect(*/}
+                    {/*(state) => state.find.chat,*/}
+                    {/*Action.dispatch('openChat')*/}
+                    {/*)(Network)}/>*/}
 
                     {/*<Scene key="customComp" title='包装原生组件' component={CustomComp}/>*/}
 
@@ -217,9 +210,7 @@ const scenes = Actions.create(
             </Stack>
         </Modal>
     </Scene>
-)
-
-
+);
 
 
 //创建 App
@@ -233,7 +224,7 @@ class App extends Component {
                     tintColor='white'
                     getSceneStyle={getSceneStyle}
                 />
-                <MessageBar />
+                <MessageBar/>
             </View>
         )
     }
@@ -246,7 +237,7 @@ const initApp = () => {
             <App/>
         </Provider>
     )
-}
+};
 
 //导出App
 export default initApp
