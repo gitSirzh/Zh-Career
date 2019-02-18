@@ -112,6 +112,10 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    repositories {
+        jcenter()
+        maven { url 'https://maven.google.com' }
+    }
     splits {
         abi {
             reset()
