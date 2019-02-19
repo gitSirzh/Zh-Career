@@ -110,6 +110,40 @@ class Music extends BaseComponent {
         )
     }
     //内容 ===end===
+
+    //QQ搜索
+    requestQQ(qqId){
+        //请求QQ空间收藏的音乐
+        let qqhao = qqId?qqId:'1067338206'; //不存在为默认王胖子的空间歌曲，因为他的歌曲多，嘻嘻
+        fetch('https://www.sojson.com/api/qqmusic/'+qqhao,'GET')
+            .then(res=>{
+                return res.json();
+            }).then(res=> {
+            //alert(JSON.stringify(res.data))
+            if (res.data){
+                if (res.status === 200) {
+                    //是否有一首歌 （接口问题，有一首歌时为对象没有数组）
+                    if (res.data.xmusicnum === "1"){
+                        this.setState({
+                            playlist:[res.data.playlist.song], //列表数据
+                            xmusicnum:res.data.xmusicnum,//数据条数 （几首歌）
+                            curtime:res.data.curtime, //请求时间
+                        });
+                    }else {
+                        this.setState({
+                            playlist:res.data.playlist, //列表数据
+                            xmusicnum:res.data.xmusicnum,//数据条数 （几首歌）
+                            curtime:res.data.curtime, //请求时间
+                        });
+                    }
+                }else {
+                    send('showBlackAlert', {show: true, title: "好气呀！企鹅关闭数据啦"});
+                }
+            }
+        }).catch(error=> {
+            send('showBlackAlert', {show: true, title: "请求啦，可能QQ号不存在呦！"});
+        })
+    }
 }
 
 const styles = StyleSheet.create({
