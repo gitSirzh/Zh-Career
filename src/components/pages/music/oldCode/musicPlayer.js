@@ -15,18 +15,18 @@ import {
     findNodeHandle,
     NativeModules
 } from 'react-native'
-import deviceInfo from '../../../utils/deviceInfo'
-import {commonStyle} from '../../../utils/commonStyle'
+import deviceInfo from '../../../../utils/deviceInfo'
+import {commonStyle} from '../../../../utils/commonStyle'
 import Video from 'react-native-video'
 import {Actions} from 'react-native-router-flux'
 import {MessageBarManager} from 'react-native-message-bar'
 import {VibrancyView, BlurView} from 'react-native-blur'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {formatTime} from '../../../utils/formatTime'
-import {ShareModal} from '../../../components/common/shareModal'
+import {formatTime} from '../../../../utils/formatTime'
+import {ShareModal} from '../../../common/shareModal/index'
 
 // 音乐列表mock数据
-const mockList = require('../../../assets/data/musicList.json');
+const mockList = require('../../../../assets/data/musicList.json');
 
 export default class MusicPlayer extends Component {
 
@@ -240,7 +240,7 @@ export default class MusicPlayer extends Component {
                 </View>
                 <Image
                     style={{width: 260, height: 260, alignSelf: 'center', position: 'absolute', top: 190}}
-                    source={require('../../../assets/images/musicPlayer/胶片盘.png')}
+                    source={require('../../../../assets/images/musicPlayer/胶片盘.png')}
                 />
                 <Animated.Image
                     style={{

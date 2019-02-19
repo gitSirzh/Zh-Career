@@ -27,9 +27,9 @@ const PATH = {
     MUSIC_XIAMI_MUSIC: '/run?song=http://www.xiami.com/song/',
     MUSIC_LIST: '/music/bymonth/',
 
-    READING_BANNER: '/reading/carousel',
-    READING_BANNER_CONTENT: '/reading/carousel/',
-    READING_ARTICLE_LIST: '/reading/index',
+    READING_BANNER: '/z_reading/carousel',
+    READING_BANNER_CONTENT: '/z_reading/carousel/',
+    READING_ARTICLE_LIST: '/z_reading/index',
     READING_ESSAY_DETAIL: '/essay/',
     READING_SERIAL_DETAIL: '/serialcontent/',
     READING_QUESTION_DETAIL: '/question/',
