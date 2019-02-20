@@ -124,7 +124,7 @@ class musicPlayer extends Component {
     //播放 / 暂停
     playing() {
         // this.musicPlayer.seek(0);
-        this.setState({playing: !this.state.playing, loadings: !this.state.loadings});//  ,paused: !this.state.paused    音乐播放 paused
+        this.setState({playing: !this.state.playing, loadings: !this.state.loadings,paused: !this.state.paused});//  ,paused: !this.state.paused    音乐播放 paused
         //在显示歌词状态时 暂停动画 showLyic=true 是显示歌词
         if (!this.state.showLyic) {
             this.animated();
