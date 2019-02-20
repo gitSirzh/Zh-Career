@@ -3,9 +3,6 @@
  */
 
 /** 公共样式表 **/
-/**
- * Created by jszh on 2018/12/27.
- */
 
 import {Platform} from 'react-native'
 import deviceInfo from './deviceInfo'
@@ -13,6 +10,8 @@ import deviceInfo from './deviceInfo'
 export const commonStyle = {
 
     /** color **/
+    //主颜色
+    main:'rgba(30,144,255,1.0)',
     // 常用颜色
     red: '#FF0000',
     orange: '#FFA500',
@@ -29,6 +28,7 @@ export const commonStyle = {
     tomato: '#FF6347',
     PeachPuff: '#FFDAB9',
     clear: 'transparent',
+    blackTranslucent: 'rgba(0,0,0,0.5)',    //黑色半透明
 
     /** 主题色 **/
     themeColor: '#e74c3c',

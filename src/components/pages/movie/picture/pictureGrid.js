@@ -8,13 +8,13 @@ import deviceInfo from '../../../../utils/deviceInfo'
 import ImageViewer from 'react-native-image-zoom-viewer'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const columns = 3
-const ITEM_WIDTH = (deviceInfo.deviceWidth - 6 * 4) / columns
+const columns = 3;
+const ITEM_WIDTH = (deviceInfo.deviceWidth - 6 * 4) / columns;
 export default class PictureGrid extends Component {
 
     constructor(props) {
-        super(props)
-        this._flatList = null
+        super(props);
+        this._flatList = null;
         this.state = {
             refreshing: false,
             modalVisible: false,
@@ -23,15 +23,15 @@ export default class PictureGrid extends Component {
     }
 
     _renderItem = (info) => {
-        let item = info.item.data
+        let item = info.item.data;
         return (
             <TouchableOpacity
-                style={{paddingRight: 6, marginTop: 2,borderWidth: 0.5,borderColor: '#fff'}}
+                style={{paddingRight: 6, marginTop: 2, borderWidth: 0.5, borderColor: '#fff'}}
                 onPress={() => this.setState({modalVisible: true, picIndex: info.index})}>
                 <Image style={{width: ITEM_WIDTH, height: ITEM_WIDTH}} source={{uri: item.image}}/>
             </TouchableOpacity>
         )
-    }
+    };
 
     renderHeader() {
         return (
@@ -45,10 +45,10 @@ export default class PictureGrid extends Component {
 
     _renderModal() {
         let tempArr = this.props.data.map((item, index) => {
-            let data = {}
-            data.url = item.data.image
+            let data = {};
+            data.url = item.data.image;
             return data
-        })
+        });
         return (
             <Modal
                 visible={this.state.modalVisible}
@@ -67,7 +67,7 @@ export default class PictureGrid extends Component {
     }
 
     render() {
-        const {data} = this.props
+        const {data} = this.props;
         return (
             <View style={{flex: 1, paddingLeft: 6, marginBottom: 6}}>
                 <FlatList
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end'
     }
-})
+});

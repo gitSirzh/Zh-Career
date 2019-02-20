@@ -124,6 +124,13 @@ export default class MovieDetail extends Component {
         let video = basic.video;
         let miniData = this.props.commentData.mini;
         let plusData = this.props.commentData.plus;
+
+        //格式化时间
+        let date = basic.releaseDate;
+        let year = date[0]+date[1]+date[2]+date[3];
+        let month = date[4]+date[5];
+        let day = date[6]+date[7];
+        date = `${year}-${month}-${day}`;
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -202,7 +209,7 @@ export default class MovieDetail extends Component {
                                     color: commonStyle.textBlockColor,
                                     fontSize: 13,
                                     marginTop: 3
-                                }}>{`${basic.releaseDate}-${basic.releaseArea}上映`}</Text>
+                                }}>{`${date} 在${basic.releaseArea}上映`}</Text>
                                 <Text numberOfLines={1} style={{
                                     fontSize: 13,
                                     color: commonStyle.textBlockColor,

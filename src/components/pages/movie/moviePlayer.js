@@ -44,6 +44,7 @@ export default class MoviePlayer extends Component {
     componentDidMount() {
         Orientation.addOrientationListener(this._updateOrientation);
         Orientation.addSpecificOrientationListener(this._updateSpecificOrientation);
+        this.isSetTimeout();
     }
 
     componentWillUnmount() {
@@ -96,7 +97,7 @@ export default class MoviePlayer extends Component {
             message: msg,
             alertType: type,
         })
-    }
+    };
 
     play() {
         this.setState({
@@ -125,9 +126,26 @@ export default class MoviePlayer extends Component {
         )
     }
 
+    isTouchedScreen(){
+        clearTimeout(this.isSetTimeout());
+        if(this.state.isTouchedScreen){
+            this.isSetTimeout();
+        }else {
+            this.setState({isTouchedScreen: true});
+        }
+    }
+
+    isSetTimeout(){
+        setTimeout(()=>{
+            if (this.state.isTouchedScreen){
+                this.setState({isTouchedScreen: false});
+            }
+        },3000)
+    }
+
     render() {
-        const {orientation, isLock} = this.state
-        const {url, title} = this.props
+        const {orientation, isLock} = this.state;
+        const {url, title} = this.props;
         return (
             <View>
                 {/*导航头*/}
@@ -154,7 +172,7 @@ export default class MoviePlayer extends Component {
                         height: orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
                         marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? (deviceInfo.isIphoneX ? 40 : 20) : 0 : 0
                     }]}
-                    onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}>
+                    onPress={() => {this.isTouchedScreen()}}>
                     <Video source={{uri: url}}
                            ref={ref => this.player = ref}
                            rate={this.state.rate}
@@ -181,16 +199,21 @@ export default class MoviePlayer extends Component {
                             <View style={styles.navContentStyle}>
                                 <View style={{flexDirection: 'row', alignItems: commonStyle.center, flex: 1}}>
                                     <TouchableOpacity
-                                        style={{height:26,backgroundColor: commonStyle.clear,flexDirection: 'row',alignItems:commonStyle.center}}
+                                        style={{
+                                            height: 26,
+                                            backgroundColor: commonStyle.clear,
+                                            flexDirection: 'row',
+                                            alignItems: commonStyle.center
+                                        }}
                                         onPress={orientation === 'PORTRAIT' ? () => Actions.pop() : Orientation.lockToPortrait}>
                                         <Icon name={'ios-arrow-back'} size={26} color={commonStyle.white}/>
                                     </TouchableOpacity>
                                     {/*<View style={{borderWidth:1,borderColor:'#fff'}}>*/}
-                                        <Text style={{
-                                            backgroundColor: commonStyle.clear,
-                                            color: commonStyle.white,
-                                            marginLeft: 10
-                                        }}>{title}</Text>
+                                    <Text style={{
+                                        backgroundColor: commonStyle.clear,
+                                        color: commonStyle.white,
+                                        marginLeft: 10
+                                    }}>{title}</Text>
                                     {/*</View>*/}
                                 </View>
                                 <View style={{
@@ -210,7 +233,10 @@ export default class MoviePlayer extends Component {
                                     </TouchableOpacity>
                                     {
                                         orientation !== 'PORTRAIT' ?
-                                            <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center}}>
+                                            <View style={{
+                                                flexDirection: commonStyle.row,
+                                                alignItems: commonStyle.center
+                                            }}>
                                                 <TouchableOpacity
                                                     style={[styles.navToolBar, {
                                                         borderColor: commonStyle.white,
@@ -229,7 +255,8 @@ export default class MoviePlayer extends Component {
                                                 <TouchableOpacity
                                                     style={styles.navToolBar}
                                                     onPress={() => alert('下载！')}>
-                                                    <Icon name={'ios-cloud-download-outline'} size={20} color={commonStyle.white}/>
+                                                    <Icon name={'ios-cloud-download-outline'} size={20}
+                                                          color={commonStyle.white}/>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity
                                                     style={styles.navToolBar}
@@ -331,7 +358,7 @@ const styles = StyleSheet.create({
         backgroundColor: commonStyle.black
     },
     toolBarStyle: {
-        backgroundColor: commonStyle.black,
+        backgroundColor: commonStyle.blackTranslucent,
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,

@@ -13,6 +13,7 @@ import action from '../../../actionCreators/music'
 import {articleType, beginTime} from '../../../constants/commonType'
 import {commonStyle} from '../../../utils/commonStyle'
 import deviceInfo from '../../../utils/deviceInfo'
+
 import musicList from '../../../assets/data/musicList1'
 
 class Music extends BaseComponent {
@@ -79,7 +80,7 @@ class Music extends BaseComponent {
                                 </View>
                                 <TouchableOpacity
                                     onPress={() =>{
-                                        Actions.
+                                        Actions.musicPlayer({xsong_name:item.xsong_name,xsinger_name:item.xsinger_name,cover:item.cover,url:item.url});
                                         this.setState({xsong_name:item.xsong_name,xsinger_name:item.xsinger_name,cover:item.cover,url:item.url});
                                     }}
                                     activeOpacity={0.6}

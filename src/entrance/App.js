@@ -34,7 +34,7 @@ import WebView from '../components/common/webView'
 /**============首页============**/
 
 /**============音乐============**/
-
+import MusicPlayer from '../components/pages/music/musicPlayer'
 /**============电影============**/
 import MovieDetail from '../components/pages/movie/movieDetail'
 import MoviePlayer from '../components/pages/movie/moviePlayer'
@@ -78,7 +78,11 @@ const scenes = Actions.create(
                     {/*================首页================*/}
 
                     {/*================音乐================*/}
-
+                    {/*播放音乐*/}
+                    <Scene key="musicPlayer" hideNavBar component={connect(
+                        (state) => state.music.music,
+                        Action.dispatch('music')
+                    )(MusicPlayer)}/>
                     {/*================电影================*/}
                     <Scene key="movieDetail" hideNavBar component={connect(
                         (state) => state.movie.movieDetail,
