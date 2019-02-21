@@ -125,5 +125,6 @@ export const commonStyle = {
     between: 'space-between',
     center: 'center',
     row: 'row',
+    end: "flex-end"
 
 };

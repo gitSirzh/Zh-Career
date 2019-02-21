@@ -13,6 +13,7 @@ import {
 
 import {MessageBarManager} from 'react-native-message-bar'
 import {Toast} from '../../../utils/toast/index'
+import Modal from 'react-native-modal'
 import Slider from 'react-native-slider'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {Normal, Tip} from "../../../utils/a_player_util/TextComponent"
@@ -30,6 +31,7 @@ class musicPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            show:false,                         //列表是否显示
             duration: 0.00,                     //进行时间
             slideValue: 0.00,                   //
             currentTime: 0.00,                  //
@@ -56,6 +58,7 @@ class musicPlayer extends Component {
 
     }
 
+    //播放方式
     playMode(playMode) {
         playMode ++;
         playMode = playMode === 3 ? playMode = 0 : playMode;
@@ -72,6 +75,11 @@ class musicPlayer extends Component {
             default:
                 break
         }
+    }
+
+    //进行时间
+    setDuration(duration) {
+        this.setState({duration: duration.duration})
     }
 
     //时间
@@ -394,7 +402,7 @@ class musicPlayer extends Component {
                         </TouchableOpacity>
                         {/*播放列表*/}
                         <TouchableOpacity
-                            onPress={() =>{alert('后续实现')}}
+                            onPress={() =>{this.showModal()}}
                             style={styles.playBtn}
                         >
                             <Icon name="ios-list-outline" size={30} color={commonStyle.white}/>
@@ -418,12 +426,66 @@ class musicPlayer extends Component {
                         playInBackground={true}
                     />
                 </View>
+                <Modal
+                    swipeDirection={'down'}
+                    isVisible={this.state.show}
+                    onSwipe={() => this.setState({ show: false })}
+                    style={styles.modal}
+                    backdropOpacity={0.1}                               //背景透明度
+                    scrollTo={this.handleScrollTo}
+                    scrollOffset={this.state.scrollOffset}
+                    scrollOffsetMax={400 - 300} // content height - ScrollView height
+                >
+                    <View style={styles.modalView}>
+                        <View style={styles.modalTitleView}>
+                            <Icon style={{marginTop: 3}} name="ios-arrow-dropdown" size={20} color={commonStyle.white}/>
+                            <Text style={{color: commonStyle.white,fontSize: 12}}> 向下滑动关闭</Text>
+                        </View>
+                        <ScrollView
+                            ref={ref => (this.scrollViewRef = ref)}
+                            onScroll={this.handleOnScroll}
+                            scrollEventThrottle={16}
+                            style={{width:deviceInfo.deviceWidth}}
+                        >
+                            {mockList.list.map((data,index)=>{
+                                return(
+                                    <TouchableOpacity
+                                        style={styles.scrollableModalContent1}
+                                        onPress={() =>{this.setState({currentIndex:index})}}
+                                    >
+                                        <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}>{data.xsong_name}</Text></View>
+                                        <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}> - {data.xsinger_name}</Text></View>
+                                    </TouchableOpacity>
+                                )
+                            })}
+                        </ScrollView>
+                        <TouchableOpacity
+                            activeOpacity={0.6}
+                            style={styles.closeBtn}
+                            onPress={() =>{this.setState({show: false })}}
+                        >
+                            <Text style={styles.closeText}>关闭</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
             </ImageBackground>
         );
     }
+    //ScrollView回调
+    handleScrollTo = p => {
+        if (this.scrollViewRef) {
+            this.scrollViewRef.scrollTo(p);
+        }
+    };
+    handleOnScroll = event => {
+        this.setState({
+            scrollOffset: event.nativeEvent.contentOffset.y,
+        });
+    };
 
-    setDuration(duration) {
-        this.setState({duration: duration.duration})
+    //显示/隐藏 播放列表
+    showModal(){
+        this.setState({show:!this.state.show})
     }
 
     componentDidMount() {
@@ -470,6 +532,43 @@ const styles = StyleSheet.create({
         width: 40,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    modal: {
+        justifyContent:commonStyle.end,
+        margin: 0
+    },
+    modalView: {
+        width:deviceInfo.deviceWidth,
+        height:300,
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        alignItems:commonStyle.center
+    },
+    modalTitleView: {
+        height:30,
+        width:deviceInfo.deviceWidth-100,
+        justifyContent:commonStyle.center,
+        alignItems:commonStyle.center,
+        flexDirection:commonStyle.row,
+        // borderWidth:1
+    },
+    scrollableModalContent1: {
+        width:deviceInfo.deviceWidth,
+        height: 40,
+        alignItems: commonStyle.center,
+        flexDirection:commonStyle.row,
+        marginLeft: 10
+    },
+    closeBtn: {
+        width:deviceInfo.deviceWidth,
+        height: 40,
+        alignItems: commonStyle.center,
+        justifyContent:commonStyle.center,
+        borderTopWidth: 0.5,
+        borderColor:commonStyle.white
+    },
+    closeText: {
+        fontSize:16,
+        color:commonStyle.white
     }
 });
 

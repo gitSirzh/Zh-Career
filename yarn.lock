@@ -4640,6 +4640,12 @@ react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.0, react-lifecycles-com
   version "3.0.4"
   resolved "http://registry.npm.taobao.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
+react-native-animatable@^1.2.4:
+  version "1.3.1"
+  resolved "http://registry.npm.taobao.org/react-native-animatable/download/react-native-animatable-1.3.1.tgz#f004a7e9de6838d0fbf210d642593cff7affd9ef"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-blur@^3.1.3:
   version "3.2.2"
   resolved "http://registry.npm.taobao.org/react-native-blur/download/react-native-blur-3.2.2.tgz#5bfb50638d148982c9560436554ed01d77d6d07d"
@@ -4697,6 +4703,13 @@ react-native-menu@~0.21.0:
 react-native-message-bar@^2.0.4:
   version "2.0.10"
   resolved "http://registry.npm.taobao.org/react-native-message-bar/download/react-native-message-bar-2.0.10.tgz#34632bdf2cbfe0f51ae4f1e9a91c42b4394a11c2"
+
+react-native-modal@^7.0.2:
+  version "7.0.2"
+  resolved "http://registry.npm.taobao.org/react-native-modal/download/react-native-modal-7.0.2.tgz#6048217807e03cd585204dace2e1ca1726c0b647"
+  dependencies:
+    prop-types "^15.6.1"
+    react-native-animatable "^1.2.4"
 
 react-native-orientation@^3.1.0:
   version "3.1.3"
