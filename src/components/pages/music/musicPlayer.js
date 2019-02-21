@@ -1,3 +1,8 @@
+
+/**
+ * Created by jszh on 2019/2/21
+ */
+
 import React, {Component} from 'react';
 import {
     View,
@@ -421,11 +426,11 @@ class musicPlayer extends Component {
                         onError={(data) => this.videoError(data)}
                         onBuffer={this.onBuffer}
                         onTimedMetadata={this.onTimedMetadata}
-
                         ignoreSilentSwitch={'ignore'} //控制iOS静默开关行为: inherit - （默认） - 使用默认的AVPlayer行为;  ignore - 即使设置了静音开关也播放音频;obey - 如果设置了静音开关，则不播放音频
                         playInBackground={true}
                     />
                 </View>
+                {/*列表弹窗*/}
                 <Modal
                     swipeDirection={'down'}
                     isVisible={this.state.show}
