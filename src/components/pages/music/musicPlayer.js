@@ -439,7 +439,7 @@ class musicPlayer extends Component {
                     backdropOpacity={0.1}                               //背景透明度
                     scrollTo={this.handleScrollTo}
                     scrollOffset={this.state.scrollOffset}
-                    scrollOffsetMax={400 - 300} // content height - ScrollView height
+                    scrollOffsetMax={400 - 200} // content height - ScrollView height
                 >
                     <View style={styles.modalView}>
                         <View style={styles.modalTitleView}>
@@ -452,17 +452,27 @@ class musicPlayer extends Component {
                             scrollEventThrottle={16}
                             style={{width:deviceInfo.deviceWidth}}
                         >
+                            <View>
                             {mockList.list.map((data,index)=>{
                                 return(
                                     <TouchableOpacity
                                         style={styles.scrollableModalContent1}
-                                        onPress={() =>{this.setState({currentIndex:index})}}
+                                        onPress={() =>{
+                                            this.setState({currentIndex:index});
+                                            //延迟播放
+                                            setTimeout(()=>{
+                                                if(this.state.paused){
+                                                    this.playing();
+                                                }
+                                            },300);
+                                        }}
                                     >
                                         <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}>{data.xsong_name}</Text></View>
                                         <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}> - {data.xsinger_name}</Text></View>
                                     </TouchableOpacity>
                                 )
                             })}
+                            </View>
                         </ScrollView>
                         <TouchableOpacity
                             activeOpacity={0.6}
@@ -544,8 +554,8 @@ const styles = StyleSheet.create({
     },
     modalView: {
         width:deviceInfo.deviceWidth,
-        height:300,
-        backgroundColor: 'rgba(0,0,0,0.4)',
+        height:400,
+        backgroundColor: 'rgba(0,0,0,0.5)',
         alignItems:commonStyle.center
     },
     modalTitleView: {
@@ -565,7 +575,7 @@ const styles = StyleSheet.create({
     },
     closeBtn: {
         width:deviceInfo.deviceWidth,
-        height: 40,
+        height: 50,
         alignItems: commonStyle.center,
         justifyContent:commonStyle.center,
         borderTopWidth: 0.5,
