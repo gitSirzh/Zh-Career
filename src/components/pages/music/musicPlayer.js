@@ -426,24 +426,9 @@ class musicPlayer extends Component {
         this.setState({duration: duration.duration})
     }
 
-    //进度条
-    sliderChange(value) {
-        // const { currentPlay, dispatch } = this.props;
-        // dispatch(setPlaySong({sliderProgress: value, ff: currentPlay.duration * value}));
-        // alert(value);
-        // setInterval(()=>{
-        //     this.setState({times:value+0.01})
-        // },1000)
-    };
-
     componentDidMount() {
         //初始加载
-        this.requestWeather(null);
         this.imgMoving();
-    }
-
-    requestWeather() {
-
     }
 
     componentWillUnmount() {
