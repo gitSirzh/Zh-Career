@@ -73,7 +73,7 @@ class Music extends BaseComponent {
                     data={musicList.list}
                     renderItem={({item,index}) => {
                         return(
-                            <View style={{marginTop:10,flexDirection: 'row',justifyContent:commonStyle.center,alignItems:commonStyle.center}}>
+                            <View style={{marginTop:5,flexDirection: 'row',justifyContent:commonStyle.center,alignItems:commonStyle.center}}>
                                 <View style={{width:40,height:50,justifyContent:commonStyle.center,alignItems:commonStyle.center}}>
                                     <Text style={{fontWeight:'100',fontSize:16}}>{index+1}</Text>
                                 </View>

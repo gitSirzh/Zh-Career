@@ -36,6 +36,7 @@ class musicPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            scrollOffset:0,
             show:false,                         //列表是否显示
             duration: 0.00,                     //进行时间
             slideValue: 0.00,                   //
@@ -432,48 +433,50 @@ class musicPlayer extends Component {
                 </View>
                 {/*列表弹窗*/}
                 <Modal
-                    swipeDirection={'down'}
                     isVisible={this.state.show}
-                    onSwipe={() => this.setState({ show: false })}
                     style={styles.modal}
-                    backdropOpacity={0.1}                               //背景透明度
-                    scrollTo={this.handleScrollTo}
-                    scrollOffset={this.state.scrollOffset}
-                    scrollOffsetMax={400 - 200} // content height - ScrollView height
+                    backdropOpacity={0.1}
+                    // onSwipe={() => this.setState({ show: false })}
+                    // swipeDirection={'down'}
+                    // scrollTo={this.handleScrollTo}
+                    // scrollOffset={this.state.scrollOffset}
+                    // scrollOffsetMax={40*mockList.list.length-400} // content height - ScrollView height
                 >
                     <View style={styles.modalView}>
                         <View style={styles.modalTitleView}>
-                            <Icon style={{marginTop: 3}} name="ios-arrow-dropdown" size={20} color={commonStyle.white}/>
-                            <Text style={{color: commonStyle.white,fontSize: 12}}> 向下滑动关闭</Text>
+                            {/*<Icon style={{marginTop: 3}} name="ios-arrow-dropdown" size={22} color={commonStyle.white}/>*/}
+                            {/*<Text style={{color: commonStyle.white,fontSize: 14}}> 向下滑动关闭</Text>*/}
+                            <Text style={{color: commonStyle.white,fontSize: 16}}>播放列表</Text>
                         </View>
-                        <ScrollView
-                            ref={ref => (this.scrollViewRef = ref)}
-                            onScroll={this.handleOnScroll}
-                            scrollEventThrottle={16}
-                            style={{width:deviceInfo.deviceWidth}}
-                        >
-                            <View>
-                            {mockList.list.map((data,index)=>{
-                                return(
-                                    <TouchableOpacity
-                                        style={styles.scrollableModalContent1}
-                                        onPress={() =>{
-                                            this.setState({currentIndex:index});
-                                            //延迟播放
-                                            setTimeout(()=>{
-                                                if(this.state.paused){
-                                                    this.playing();
-                                                }
-                                            },300);
-                                        }}
-                                    >
-                                        <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}>{data.xsong_name}</Text></View>
-                                        <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}> - {data.xsinger_name}</Text></View>
-                                    </TouchableOpacity>
-                                )
-                            })}
-                            </View>
-                        </ScrollView>
+                        <View style={{flex:1}}>
+                            <ScrollView
+                                ref={ref => (this.scrollViewRef = ref)}
+                                onScroll={this.handleOnScroll}
+                                scrollEventThrottle={0}
+                                style={{width:deviceInfo.deviceWidth}}
+                            >
+                                {mockList.list.map((data,index)=>{
+                                    return(
+                                        <TouchableOpacity
+                                            style={styles.scrollableModalContent1}
+                                            onPress={() =>{
+                                                this.setState({currentIndex:index});
+                                                this.setState({show: false });
+                                                //延迟播放
+                                                setTimeout(()=>{
+                                                    if(this.state.paused){
+                                                        this.playing();
+                                                    }
+                                                },300);
+                                            }}
+                                        >
+                                            <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}>{data.xsong_name}</Text></View>
+                                            <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.white}}> - {data.xsinger_name}</Text></View>
+                                        </TouchableOpacity>
+                                    )
+                                })}
+                            </ScrollView>
+                        </View>
                         <TouchableOpacity
                             activeOpacity={0.6}
                             style={styles.closeBtn}
@@ -555,16 +558,17 @@ const styles = StyleSheet.create({
     modalView: {
         width:deviceInfo.deviceWidth,
         height:400,
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.7)',
         alignItems:commonStyle.center
     },
     modalTitleView: {
-        height:30,
-        width:deviceInfo.deviceWidth-100,
+        height:40,
+        width:deviceInfo.deviceWidth,
         justifyContent:commonStyle.center,
         alignItems:commonStyle.center,
         flexDirection:commonStyle.row,
-        // borderWidth:1
+        borderBottomWidth:0.5,
+        borderColor:commonStyle.white
     },
     scrollableModalContent1: {
         width:deviceInfo.deviceWidth,
