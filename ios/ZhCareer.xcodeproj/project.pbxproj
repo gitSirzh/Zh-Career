@@ -849,7 +849,7 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -1464,7 +1464,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1483,10 +1483,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jszh.AppStore.ZhCareer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hengguoApp.ZhCareer;
 				PRODUCT_NAME = ZhCareer;
-				PROVISIONING_PROFILE = "b9638bd0-53a0-4799-a5ca-5d3c9a541060";
-				PROVISIONING_PROFILE_SPECIFIER = jszhAppStore;
+				PROVISIONING_PROFILE = "479f4f38-e09e-4527-9d15-1ccb1769ce0d";
+				PROVISIONING_PROFILE_SPECIFIER = hengguoDevelopment;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1496,7 +1496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JZ4B4YJLL7;
@@ -1514,10 +1514,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jszh.AppStore.ZhCareer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hengguoApp.ZhCareer;
 				PRODUCT_NAME = ZhCareer;
-				PROVISIONING_PROFILE = "b9638bd0-53a0-4799-a5ca-5d3c9a541060";
-				PROVISIONING_PROFILE_SPECIFIER = jszhAppStore;
+				PROVISIONING_PROFILE = "479f4f38-e09e-4527-9d15-1ccb1769ce0d";
+				PROVISIONING_PROFILE_SPECIFIER = hengguoDevelopment;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

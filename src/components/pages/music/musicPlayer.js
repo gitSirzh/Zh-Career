@@ -12,48 +12,67 @@ import {
 } from 'react-native';
 
 import {MessageBarManager} from 'react-native-message-bar'
-import Slider from 'react-native-slider';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {Normal, Tip} from "../../../utils/a_player_util/TextComponent";
-import {commonStyle} from '../../../utils/commonStyle';
-import deviceInfo from '../../../utils/deviceInfo';
-import Video from 'react-native-video';
-import Navbar from './component/navbar';
-import {Actions} from "react-native-router-flux";
-import {formatTime} from "../../../utils/formatTime";
+import {Toast} from '../../../utils/toast/index'
+import Slider from 'react-native-slider'
+import Icon from 'react-native-vector-icons/Ionicons'
+import {Normal, Tip} from "../../../utils/a_player_util/TextComponent"
+import {commonStyle} from '../../../utils/commonStyle'
+import deviceInfo from '../../../utils/deviceInfo'
+import Video from 'react-native-video'
+import Navbar from './component/navbar'
+import {Actions} from "react-native-router-flux"
+import {formatTime} from "../../../utils/formatTime"
 
-//音乐数据
-import mockList from '../../../assets/data/musicList1';
+//musicData
+import mockList from '../../../assets/data/musicList1'
 
 class musicPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
             duration: 0.00,                     //进行时间
-            slideValue: 0.00,
-            currentTime: 0.00,
-            currentIndex: 0,
+            slideValue: 0.00,                   //
+            currentTime: 0.00,                  //
+            currentIndex: this.props.music_id,  //子ID-选中ID
+            playMode: 0,                        //播放方式
             imgRotate: new Animated.Value(0),   //开始 初始化0
             showLyic: false,                    //初次显示旋转图片
             times: 0,                           //模拟时间进度
             playing: true,                      //播放
-            loadings: true,                     //
-            paused: false,                       // false: 播放，true: 暂停
-
+            loadings: true,                     //*已废弃*
+            paused: false,                      // false: 播放，true: 暂停
+            playModeIcon: 'ios-repeat-outline', //初始播放方式图标
         };
-        this.isGoing = true; //为真旋转
+        this.isGoing = true;                    //为真旋转
         this.myAnimate = Animated.timing(this.state.imgRotate, {
             toValue: 1,
-            duration: 12000, //转速
-            easing: Easing.linear, //Easing.inOut(Easing.linear) 线性函数，和Easing.linear 一样并且这个效果更好点
+            duration: 12000,                    //转速
+            easing: Easing.linear,              //Easing.inOut(Easing.linear) 线性函数，和Easing.linear 一样并且这个效果更好点
         });
-        this.player = '';
+        this.player = '';                       //初始player
     }
 
     componentWillMount() {
-        //TODO
+
     }
 
+    playMode(playMode) {
+        playMode ++;
+        playMode = playMode === 3 ? playMode = 0 : playMode;
+        switch (playMode) {
+            case 0:
+                this.setState({playMode, playModeIcon: 'ios-repeat'});  //循环
+                break;
+            case 1:
+                this.setState({playMode, playModeIcon: 'ios-radio'});           //单曲循环
+                break;
+            case 2:
+                this.setState({playMode, playModeIcon: 'ios-infinite'});        //随机播放
+                break;
+            default:
+                break
+        }
+    }
 
     //时间
     setTime(data) {
@@ -66,25 +85,37 @@ class musicPlayer extends Component {
 
     //下一首
     nextSong(currentIndex) {
-        this.reset();
-        this.setState({currentIndex: currentIndex >= mockList.list.length ? 0 : currentIndex})
+        if (currentIndex <= mockList.list.length - 1){
+            this.reset();
+            this.setState({currentIndex : currentIndex});  //this.setState({currentIndex: currentIndex >= mockList.list.length - 1 ? 0 : currentIndex})
+        } else {
+            // this.showMessageBar('消息')('已帮你切换到第一首')('fuccess');
+            Toast.show('已帮你切换到第一首')
+            this.setState({currentIndex:0});
+        }
     }
 
     //上一首
     preSong(currentIndex) {
-        this.reset();
-        this.setState({currentIndex: currentIndex < 0 ? mockList.list.length - 1 : currentIndex})
+        if (currentIndex >= 0 ){
+            this.reset();
+            this.setState({currentIndex : currentIndex});  //this.setState({currentIndex: currentIndex <= 0 ? mockList.list.length - 1 : currentIndex})
+        }else {
+            // this.showMessageBar('消息')('已经到第一首了呦')('fuccess');
+            Toast.show('已经到第一首了呦');
+        }
     }
 
     //播放完，切换下一首
     onEnd(data) {
-        this.showMessageBar('亲！')('已帮你切换到下一首')('fuccess');
+        // this.showMessageBar('消息')('已帮你切换到下一首')('fuccess');
+        Toast.show('已帮你切换到下一首');
         if (this.state.playMode === 0) {
             this.nextSong(this.state.currentIndex + 1)
         } else if (this.state.playMode === 1) {
             this.player.seek(0)
         } else {
-            this.nextSong(Math.floor(Math.random() * this.props.musicList.length))
+            this.nextSong(Math.floor(Math.random() * mockList.list.length))
         }
     }
 
@@ -93,7 +124,7 @@ class musicPlayer extends Component {
         this.showMessageBar('播放器报错啦！')(error)('error')
     }
 
-    //提示信息
+    //提示信息(顶部弹窗)
     showMessageBar = (title) => (msg) => (type) => {
         MessageBarManager.showAlert({
             title: title,
@@ -123,7 +154,6 @@ class musicPlayer extends Component {
 
     //播放 / 暂停
     playing() {
-        // this.musicPlayer.seek(0);
         this.setState({playing: !this.state.playing, loadings: !this.state.loadings,paused: !this.state.paused});//  ,paused: !this.state.paused    音乐播放 paused
         //在显示歌词状态时 暂停动画 showLyic=true 是显示歌词
         if (!this.state.showLyic) {
@@ -154,7 +184,7 @@ class musicPlayer extends Component {
             })
         } else {
             this.state.imgRotate.stopAnimation((oneTimeRotate) => {
-                //计算角度比例
+                //根据时间计算角度比例
                 this.myAnimate = Animated.timing(this.state.imgRotate, {
                     toValue: 1,
                     duration: (1 - oneTimeRotate) * 12000,
@@ -184,16 +214,17 @@ class musicPlayer extends Component {
         //开始暂停
         let st = this.state.playing ? 'ios-pause-outline' : 'ios-play-outline';
 
-        // let musicInfo = mockList.list[this.state.currentIndex] || {}
+        let musicInfo = mockList.list[this.state.currentIndex] || {};
 
+        // let backgroundImg = musicInfo.cover?{uri: musicInfo.cover}:require('../../../assets/images/img/hengguoLOGO.jpeg');
         return (
             <ImageBackground
-                blurRadius={8}
-                source={{uri: datas.cover}}
+                blurRadius={66}
+                source={{uri: musicInfo.cover}}
                 style={{width: deviceInfo.deviceWidth, height: deviceInfo.deviceHeight, alignItems: 'center'}}
             >
                 {/*导航条*/}
-                <Navbar backCallback={()=>{Actions.pop()}} centerColor={'rgba(0,0,0,0)'} textColor={'#fff'} title={datas.xsong_name}/>
+                <Navbar backCallback={()=>{Actions.pop()}} centerColor={'rgba(0,0,0,0)'} textColor={'#fff'} title={musicInfo.xsong_name}/>
                 {/*分割线*/}
                 <View style={{
                     width: deviceInfo.deviceWidth - 100,
@@ -274,7 +305,7 @@ class musicPlayer extends Component {
                                 }}>
                                     <Animated.Image
                                         //source={{uri: detail.al && detail.al.picUrl + '?param=200y200'}}
-                                        source={{uri: datas.cover}}
+                                        source={{uri: musicInfo.cover}}
                                         style={[{
                                             width: deviceInfo.deviceWidth - 152,
                                             height: deviceInfo.deviceWidth - 152,
@@ -315,27 +346,66 @@ class musicPlayer extends Component {
                     </View>
                     {/*底部按钮 //TODO */}
                     <View style={styles.footerBtn}>
-                        {/*<TouchableOpacity*/}
-                        {/*onPress={() =>{send('showBlackAlert', {show: true, title: "后续实现"});}}*/}
-                        {/*>*/}
-                        {/*<Icon name="ios-repeat-outline" size={30} color={commonStyle.white} />*/}
-                        {/*</TouchableOpacity>*/}
-                        <Icon name="ios-repeat-outline" size={30} color={commonStyle.white}/>
-                        <Icon name="ios-skip-backward-outline" size={30} color={commonStyle.white}/>
+                        {/*播放方式*/}
+                        <TouchableOpacity
+                            onPress={() =>{this.playMode(this.state.playMode)}}
+                            style={styles.playBtn}
+                        >
+                            <Icon name={this.state.playModeIcon} size={30} color={commonStyle.white}/>
+                        </TouchableOpacity>
+                        {/*上一首*/}
+                        <TouchableOpacity
+                            onPress={() =>{
+                                //切换上一首并播放
+                                this.preSong(this.state.currentIndex - 1);
+                                //延迟播放
+                                setTimeout(()=>{
+                                    if(this.state.paused){
+                                        this.playing();
+                                    }
+                                },300);
+                            }}
+                            style={styles.playBtn}
+                        >
+                            <Icon name="ios-skip-backward-outline" size={30} color={commonStyle.white}/>
+                        </TouchableOpacity>
                         {/*模拟 播放和暂停*/}
-                        <TouchableOpacity onPress={() => this.playing()} style={styles.playBtn}>
+                        <TouchableOpacity
+                            onPress={() => this.playing()}
+                            style={styles.playBtn}
+                        >
                             <Icon name={st} size={30} color={commonStyle.white}/>
                         </TouchableOpacity>
-                        <Icon name="ios-skip-forward-outline" size={30} color={commonStyle.white}/>
-                        <Icon name="ios-list-outline" size={30} color={commonStyle.white}/>
+                        {/*下一首*/}
+                        <TouchableOpacity
+                            onPress={() =>{
+                                //切换下一首并播放
+                                this.nextSong(this.state.currentIndex + 1);
+                                //延迟播放
+                                setTimeout(()=>{
+                                    if(this.state.paused){
+                                        this.playing();
+                                    }
+                                },300);
+                            }}
+                            style={styles.playBtn}
+                        >
+                            <Icon name="ios-skip-forward-outline" size={30} color={commonStyle.white}/>
+                        </TouchableOpacity>
+                        {/*播放列表*/}
+                        <TouchableOpacity
+                            onPress={() =>{alert('后续实现')}}
+                            style={styles.playBtn}
+                        >
+                            <Icon name="ios-list-outline" size={30} color={commonStyle.white}/>
+                        </TouchableOpacity>
                     </View>
-                    {/*播放组件*/}
+                    {/*播放器组件*/}
                     <Video
                         ref={video => this.player = video}
-                        source={{uri: datas.url}}
+                        source={{uri: musicInfo.url}}
                         volume={1.0}
                         paused={this.state.paused}
-                        playInBackground={true}
                         onLoadStart={this.loadStart}
                         onLoad={data => this.setDuration(data)}
                         onProgress={(data) => this.setTime(data)}
@@ -343,6 +413,9 @@ class musicPlayer extends Component {
                         onError={(data) => this.videoError(data)}
                         onBuffer={this.onBuffer}
                         onTimedMetadata={this.onTimedMetadata}
+
+                        ignoreSilentSwitch={'ignore'} //控制iOS静默开关行为: inherit - （默认） - 使用默认的AVPlayer行为;  ignore - 即使设置了静音开关也播放音频;obey - 如果设置了静音开关，则不播放音频
+                        playInBackground={true}
                     />
                 </View>
             </ImageBackground>
@@ -392,7 +465,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-    //进度条上的点
     thumb: {
         width: 20,
         height: 20,
@@ -401,7 +473,6 @@ const styles = StyleSheet.create({
         borderWidth: 7,
         borderRadius: 10,
     },
-    //底部按钮
     footerBtn: {
         height: 50,
         width: deviceInfo.deviceWidth,
