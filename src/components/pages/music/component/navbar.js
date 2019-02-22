@@ -34,11 +34,9 @@ class Navbar extends Component {
 
                 <View
                     style={[styles.middle, {backgroundColor: this.props.centerColor ? this.props.centerColor : this.state.colors ? this.state.colors : commonStyle.main}]}>
-                    <Text style={{
-                        fontSize: 16 ,
-                        // fontWeight: '400',
-                        color: this.props.textColor ? this.props.textColor : commonStyle.white
-                    }}>
+                    <Text
+                        style={{fontSize: 16 , fontWeight: '400', color: this.props.textColor ? this.props.textColor : commonStyle.white}}
+                    >
                         {this.props.title}</Text>
                     {this.props.children}
                 </View>

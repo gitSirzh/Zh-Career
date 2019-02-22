@@ -10,9 +10,9 @@ import {Actions} from 'react-native-router-flux'
 export default class ShowTimeList extends Component {
 
     constructor(props) {
-        super(props)
-        this.renderRow = this.renderRow.bind(this)
-        this.renderHeader = this.renderHeader.bind(this)
+        super(props);
+        this.renderRow = this.renderRow.bind(this);
+        this.renderHeader = this.renderHeader.bind(this);
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
         }
@@ -58,7 +58,7 @@ export default class ShowTimeList extends Component {
     }
 
     render() {
-        let dataSource = this.state.dataSource.cloneWithRows(this.props.comingNewArr)
+        let dataSource = this.state.dataSource.cloneWithRows(this.props.comingNewArr);
         return (
             <ListView
                 style={styles.content}
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
     content: {
         backgroundColor: commonStyle.white
     }
-})
+});
