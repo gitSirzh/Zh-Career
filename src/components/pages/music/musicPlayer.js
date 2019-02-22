@@ -29,6 +29,7 @@ import Video from 'react-native-video'
 import Navbar from './component/navbar'
 import {Actions} from "react-native-router-flux"
 import {formatTime} from "../../../utils/formatTime"
+import Line from './component/line'
 
 //musicData
 import mockList from '../../../assets/data/musicList1'
@@ -39,9 +40,9 @@ class musicPlayer extends Component {
         this.state = {
             scrollOffset:0,
             show:false,                         //列表是否显示
-            duration: 0.00,                     //进行时间
-            slideValue: 0.00,                   //
-            currentTime: 0.00,                  //
+            duration: 0.00,                     //总时间
+            slideValue: 0.00,                   //进度条
+            currentTime: 0.00,                  //进行时间
             currentIndex: this.props.music_id,  //子ID-选中ID
             playMode: 0,                        //播放方式
             imgRotate: new Animated.Value(0),   //开始 初始化0
@@ -216,7 +217,7 @@ class musicPlayer extends Component {
     isPop(){
         Alert.alert(
             '消息',
-            '不看看右下角的列表吗？退出去音乐也停止播放了呦',
+            '不看下右下角的列表吗?\n退出去音乐也停止播放了呦!',
             [
                 {text: '再听听', onPress: () => '再听听', style: 'cancel'},
                 {text: '退出', onPress: () => {Actions.pop()}},
@@ -251,39 +252,11 @@ class musicPlayer extends Component {
                 style={{width: deviceInfo.deviceWidth, height: deviceInfo.deviceHeight, alignItems: 'center'}}
             >
                 {/*导航条*/}
-                <Navbar backCallback={()=>{this.isPop()}} centerColor={'rgba(0,0,0,0)'} textColor={'#fff'} title={musicInfo.xsong_name}/>
-                {/*分割线*/}
-                <View style={{
-                    width: deviceInfo.deviceWidth - 100,
-                    height: 0.34811,
-                    backgroundColor: 'rgba(220,220,220,0.5)',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <View style={{
-                        width: deviceInfo.deviceWidth - 110,
-                        height: 0.34812,
-                        backgroundColor: 'rgba(220,220,220,0.5)',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}>
-                        <View style={{
-                            width: deviceInfo.deviceWidth - 140,
-                            height: 0.34813,
-                            backgroundColor: 'rgba(220,220,220,0.7)',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <View style={{
-                                width: deviceInfo.deviceWidth - 200,
-                                height: 0.7,
-                                backgroundColor: 'rgba(220,220,220,0.8)'
-                            }}/>
-                        </View>
-                    </View>
-                </View>
+                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} title={musicInfo.xsong_name}/>
+                {/*分割线 line*/}
+                <Line/>
                 {/*中部 - 旋转*/}
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{flex: 1, justifyContent: commonStyle.center, alignItems: commonStyle.center}}>
                     <TouchableOpacity
                         activeOpacity={1}
                         onPress={() => {
@@ -291,24 +264,18 @@ class musicPlayer extends Component {
                         }}
                         style={styles.cdContainer}
                     >
-                        {this.state.showLyic ? (
-                                //歌词
+                        {this.state.showLyic ?
+                            (//歌词
                                 <View style={styles.cdContainer}>
                                     <ScrollView
                                         style={{width: deviceInfo.deviceWidth}}
-                                        contentContainerStyle={{alignItems: 'center',}}  //alignItems: 'center',paddingTop: '30%', paddingBottom: '30%'
+                                        contentContainerStyle={{alignItems: commonStyle.center}}  //alignItems: 'center',paddingTop: '30%', paddingBottom: '30%'
                                         ref={lyricScroll => this.lyricScroll = lyricScroll}
                                     >
-                                        <Text style={{
-                                            marginTop: 260,
-                                            fontSize: 12,
-                                            color: '#fff'
-                                        }}>这里是歌词，正在实现此功能</Text>
-                                        {/*{*/}
-                                        {/*lyricArr.map((v, i) => (*/}
-                                        {/*<Normal color={v === currentLrc ?commonStyle.main?commonStyle.main:'#0882ff':'#fff'} key={i} style={{paddingTop: 5, paddingBottom: 5}}>{v.replace(/\[.*\]/g, '')}</Normal>*/}
-                                        {/*))*/}
-                                        {/*}*/}
+                                        <Text style={{marginTop: 260, fontSize: 12, color: commonStyle.white}}>这里是歌词，正在实现此功能</Text>
+                                        {/*{lyricArr.map((v, i) => (*/}
+                                            {/*<Normal color={v === currentLrc ?commonStyle.main?commonStyle.main:'#0882ff':'#fff'} key={i} style={{paddingTop: 5, paddingBottom: 5}}>{v.replace(/\[.*\]/g, '')}</Normal>*/}
+                                        {/*))}*/}
                                     </ScrollView>
                                 </View>)
                             ://胶片
@@ -350,18 +317,13 @@ class musicPlayer extends Component {
                         }
                     </TouchableOpacity>
                     <View style={{height: 30}}/>
-                    {/*底部条*/}
-                    {/*伪进度条静态  --  有歌曲的时候在回填数据*/}
+                    {/*进度条*/}
                     <View style={styles.sliderBtn}>
-                        <Tip style={{width: 35}} color={'#fff'}>{formatTime.formatMediaTime(Math.floor(this.state.currentTime))}</Tip>
+                        <Tip style={{width: 35}} color={commonStyle.white}>{formatTime.formatMediaTime(Math.floor(this.state.currentTime))}</Tip>
                         <Slider
                             maximumTrackTintColor={commonStyle.white}
-                            minimumTrackTintColor={commonStyle.main ? commonStyle.main : '#0882ff'}
-                            thumbStyle={{
-                                width: 20, height: 20,
-                                backgroundColor: commonStyle.main ? commonStyle.main : '#0882ff',
-                                borderColor: commonStyle.white, borderWidth: 7, borderRadius: 10,
-                            }}
+                            minimumTrackTintColor={commonStyle.main}
+                            thumbStyle={{width: 20, height: 20, backgroundColor: commonStyle.main, borderColor: commonStyle.white, borderWidth: 7, borderRadius: 10}}
                             trackStyle={{height: 2}}
                             style={{width: deviceInfo.deviceWidth - 100}}
                             value={this.state.slideValue}
@@ -369,9 +331,10 @@ class musicPlayer extends Component {
                             onValueChange={value => this.setState({currentTime: value})}
                             onSlidingComplete={value => this.player.seek(value)}
                         />
-                        <Tip style={{marginLeft: 10, width: 35}} color="#fff">{formatTime.formatMediaTime(Math.floor(this.state.duration))}</Tip>
+                        <Tip style={{marginLeft: 10, width: 35}} color={commonStyle.white}>{formatTime.formatMediaTime(Math.floor(this.state.duration))}</Tip>
                     </View>
-                    {/*底部按钮 //TODO */}
+                    {/*底部条*/}
+                    {/*底部按钮*/}
                     <View style={styles.footerBtn}>
                         {/*播放方式*/}
                         <TouchableOpacity
@@ -459,7 +422,7 @@ class musicPlayer extends Component {
                         <View style={styles.modalTitleView}>
                             {/*<Icon style={{marginTop: 3}} name="ios-arrow-dropdown" size={22} color={commonStyle.white}/>*/}
                             {/*<Text style={{color: commonStyle.white,fontSize: 14}}> 向下滑动关闭</Text>*/}
-                            <Text style={{color: commonStyle.lightGray,fontSize: 14}}>所有歌曲都在这里哟</Text>
+                            <Text style={{color: commonStyle.lightGray,fontSize: 15}}>所有歌曲都在这里哟</Text>
                         </View>
                         <ScrollView
                             ref={ref => (this.scrollViewRef = ref)}
@@ -471,10 +434,9 @@ class musicPlayer extends Component {
                                 return(
                                     <TouchableOpacity
                                         key={index}
-                                        style={styles.scrollableModalContent1}
+                                        style={styles.scrollableModalContent}
                                         onPress={() =>{
-                                            this.setState({currentIndex:index});
-                                            this.setState({show: false });
+                                            this.setState({currentIndex:index,show: false});
                                             //延迟播放
                                             setTimeout(()=>{
                                                 if(this.state.paused){
@@ -483,8 +445,8 @@ class musicPlayer extends Component {
                                             },300);
                                         }}
                                     >
-                                        <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}}>{data.xsong_name}</Text></View>
-                                        <View><Text style={{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}}> - {data.xsinger_name}</Text></View>
+                                        <View><Text style={[styles.musicName,{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}]}>{data.xsong_name}</Text></View>
+                                        <View><Text style={[styles.musicName,{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}]}> - {data.xsinger_name}</Text></View>
                                     </TouchableOpacity>
                                 )
                             })}
@@ -572,8 +534,8 @@ const styles = StyleSheet.create({
         height:400,
         backgroundColor: 'rgba(0,0,0,0.9)',
         alignItems:commonStyle.center,
-        borderTopLeftRadius:5,
-        borderTopRightRadius:5
+        borderTopLeftRadius:6,
+        borderTopRightRadius:6
     },
     modalTitleView: {
         height:35,
@@ -584,7 +546,7 @@ const styles = StyleSheet.create({
         borderBottomWidth:0.5,
         borderColor:commonStyle.drakGray
     },
-    scrollableModalContent1: {
+    scrollableModalContent: {
         width:deviceInfo.deviceWidth,
         height: 35,
         alignItems: commonStyle.center,
@@ -602,6 +564,9 @@ const styles = StyleSheet.create({
     closeText: {
         fontSize:16,
         color:commonStyle.lightGray
+    },
+    musicName:{
+        fontSize:14
     }
 });
 

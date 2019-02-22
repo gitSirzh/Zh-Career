@@ -28,6 +28,7 @@ export const commonStyle = {
     tomato: '#FF6347',
     PeachPuff: '#FFDAB9',
     clear: 'transparent',
+    transparent: 'rgba(0,0,0,0)',    //全部透明
     blackTranslucent: 'rgba(0,0,0,0.5)',    //黑色半透明
 
     /** 主题色 **/
