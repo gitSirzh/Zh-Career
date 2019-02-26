@@ -81,13 +81,13 @@ export const commonStyle = {
 
     /** height **/
     // 导航栏的高度
-    navHeight: Platform.OS === 'ios' ? (deviceInfo.isIphoneX ? 88 : 64) : 56,
+    navHeight: deviceInfo.isIphoneX ? 88 : 64,
     // 导航栏顶部的状态栏高度
-    navStatusBarHeight: Platform.OS === 'ios' ? (deviceInfo.isIphoneX ? 44 : 20) : 0,
+    navStatusBarHeight:  deviceInfo.isIphoneX ? 44 : 20,
     // 导航栏除掉状态栏的高度
-    navContentHeight: Platform.OS === 'ios' ? 44 : 56,
+    navContentHeight: Platform.OS === 'ios' ? 44 : 44,
     // tabBar的高度
-    tabBarHeight: Platform.OS === 'ios' ? (deviceInfo.isIphoneX ? 83 : 49) : 49,
+    tabBarHeight: deviceInfo.isIphoneX ? 83 : 49,
     // 底部按钮高度
     bottonBtnHeight: 44,
     // 通用列表cell高度

@@ -216,7 +216,7 @@ class musicPlayer extends Component {
     //退出事件
     isPop(){
         Alert.alert(
-            '消息',
+            '恒果提示',
             '不看下右下角的列表吗?\n退出去音乐也停止播放了呦!',
             [
                 {text: '再听听', onPress: () => '再听听', style: 'cancel'},
@@ -249,7 +249,7 @@ class musicPlayer extends Component {
             <ImageBackground
                 blurRadius={66}
                 source={{uri: musicInfo.cover}}
-                style={{width: deviceInfo.deviceWidth, height: deviceInfo.deviceHeight, alignItems: 'center'}}
+                style={{flex:1, alignItems: 'center'}}
             >
                 {/*导航条*/}
                 <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} title={musicInfo.xsong_name}/>

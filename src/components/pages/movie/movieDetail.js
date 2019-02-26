@@ -144,8 +144,9 @@ export default class MovieDetail extends Component {
                         }}
                         style={styles.bgContainer}
                         source={{uri: basic.img}}
-                        resizeMode='stretch'
+                        // resizeMode='stretch'
                         onLoadEnd={() => this.imageLoaded()}
+                        blurRadius={Platform.OS === 'ios'?0:20}
                     />
                     <View style={styles.bgContainer}>
                         {
@@ -154,14 +155,14 @@ export default class MovieDetail extends Component {
                                     blurType={'light'}
                                     blurAmount={10}
                                     style={styles.container}
-                                /> :
-                                <BlurView
-                                    style={styles.absolute}
-                                    viewRef={this.state.viewRef}
-                                    blurType="light"
-                                    blurAmount={10}
-                                />
+                                /> : null
                         }
+                        {/*<BlurView*/}
+                            {/*style={styles.absolute}*/}
+                            {/*viewRef={this.state.viewRef}*/}
+                            {/*blurType="light"*/}
+                            {/*blurAmount={10}*/}
+                        {/*/>*/}
                     </View>
                     <View style={styles.contentStyle}>
                         <View style={styles.headerStyle}>
@@ -184,12 +185,12 @@ export default class MovieDetail extends Component {
                             </TouchableOpacity>
                             <View style={styles.rightContent}>
                                 <Text style={{
-                                    color: commonStyle.white,
+                                    color: Platform.OS === 'ios' ? commonStyle.white : commonStyle.black,
                                     fontSize: 16,
                                     marginVertical: 5
                                 }}>{basic.name}</Text>
                                 <Text style={{
-                                    color: commonStyle.white,
+                                    color: Platform.OS === 'ios' ? commonStyle.white : commonStyle.black,
                                     fontSize: 13,
                                     marginBottom: 8
                                 }}>{basic.nameEn}</Text>
@@ -490,59 +491,8 @@ export default class MovieDetail extends Component {
                                 </View> : null
                         }
                         <View style={{height: 40, justifyContent: commonStyle.center, alignItems: commonStyle.center}}>
-                            <Text>/**后续完善**/</Text>
+                            <Text>*后续完善*</Text>
                         </View>
-                        {/*关闭评论*/}
-                        {/*<View>*/}
-                        {/*<View style={{*/}
-                        {/*height: 40,*/}
-                        {/*paddingHorizontal: 10,*/}
-                        {/*flexDirection: 'row',*/}
-                        {/*alignItems: 'center',*/}
-                        {/*justifyContent: 'space-between'*/}
-                        {/*}}>*/}
-                        {/*<Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>短评</Text>*/}
-                        {/*<View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
-                        {/*<Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>*/}
-                        {/*<Icon name={'ios-play'} size={12} color={commonStyle.black}/>*/}
-                        {/*</View>*/}
-                        {/*</View>*/}
-                        {/*{this.renderMiniComment(miniData.list)}*/}
-                        {/*<TouchableOpacity*/}
-                        {/*style={{*/}
-                        {/*alignItems: 'center',*/}
-                        {/*justifyContent: 'center',*/}
-                        {/*height: 50,*/}
-                        {/*borderBottomWidth: 10,*/}
-                        {/*borderBottomColor: commonStyle.lineColor*/}
-                        {/*}}*/}
-                        {/*onPress={() => Actions.miniComment({id: basic.movieId})}*/}
-                        {/*>*/}
-                        {/*<Text style={{color: '#FD7108', fontSize: 15}}>{`查看更多${miniData.total}条短评`}</Text>*/}
-                        {/*</TouchableOpacity>*/}
-                        {/*</View>*/}
-                        {/*<View>*/}
-                        {/*<View style={{*/}
-                        {/*height: 40,*/}
-                        {/*paddingHorizontal: 10,*/}
-                        {/*flexDirection: 'row',*/}
-                        {/*alignItems: 'center',*/}
-                        {/*justifyContent: 'space-between'*/}
-                        {/*}}>*/}
-                        {/*<Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>影评</Text>*/}
-                        {/*<View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
-                        {/*<Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>*/}
-                        {/*<Icon name={'ios-play'} size={12} color={commonStyle.black}/>*/}
-                        {/*</View>*/}
-                        {/*</View>*/}
-                        {/*{this.renderPlusComment(plusData.list)}*/}
-                        {/*<TouchableOpacity*/}
-                        {/*style={{alignItems: 'center', justifyContent: 'center', height: 40}}*/}
-                        {/*onPress={() => Actions.plusComment({id: basic.movieId, title: basic.name})}*/}
-                        {/*>*/}
-                        {/*<Text style={{color: '#FD7108', fontSize: 15}}>{`查看更多${plusData.total}条短评`}</Text>*/}
-                        {/*</TouchableOpacity>*/}
-                        {/*</View>*/}
                     </View>
                 </ScrollView>
                 {/* 底部操作栏 */}
@@ -621,8 +571,8 @@ export default class MovieDetail extends Component {
     }
 
     render() {
-        let data = this.props.movieDetail
-        let commentData = this.props.commentData
+        let data = this.props.movieDetail;
+        let commentData = this.props.commentData;
         return (
             data.basic && commentData.mini ?
                 this.renderContent() : <View/>
@@ -638,19 +588,18 @@ const styles = StyleSheet.create({
     bgContainer: {
         position: 'absolute',
         height: 120,
-        width: deviceInfo.deviceWidth
+        width: deviceInfo.deviceWidth,
     },
     contentStyle: {
         flex: 1,
-        marginTop: 120,
-        backgroundColor: commonStyle.white
+        marginTop: Platform.OS === 'ios' ? 120 : 70,
+        backgroundColor: commonStyle.white,
     },
     headerStyle: {
-        marginTop: -50,
-        // marginTop: 0,
+        marginTop:Platform.OS === 'ios' ? -50 : 0,
         flexDirection: 'row',
         marginHorizontal: 10,
-        paddingBottom: 10,
+        paddingBottom: 10
     },
     img: {
         width: 100,
@@ -743,9 +692,8 @@ const styles = StyleSheet.create({
     },
     actorCell: {
         height: 135,
-        // _height: 140,
         margin: 10,
         marginLeft: 0,
         marginTop: 0
     }
-})
+});

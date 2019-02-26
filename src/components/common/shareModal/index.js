@@ -6,7 +6,7 @@ import {commonStyle} from '../../../utils/commonStyle'
 import deviceInfo from '../../../utils/deviceInfo'
 import {View, TouchableOpacity, Text, StyleSheet, Modal, NativeModules} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import {sharePlatform} from '../../../constants/commonType'
+// import {sharePlatform} from '../../../constants/commonType'
 
 //原生分享模版
 // const ShareModule = NativeModules.shareModule;

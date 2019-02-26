@@ -87,7 +87,7 @@ class Music extends BaseComponent {
                                     activeOpacity={0.6}
                                 >
                                     <View style={{marginLeft: 10,width:deviceInfo.deviceWidth-90}}>
-                                        <Text style={{fontSize:15}}>{item.xsong_name}</Text>
+                                        <Text style={{fontSize:15,color:commonStyle.black}}>{item.xsong_name}</Text>
                                         <Text style={{marginTop:5,fontSize:12,color:commonStyle.textGrayColor}}>{item.xsinger_name}</Text>
                                         <View style={{marginTop:10,height:0.5,backgroundColor: commonStyle.lineColor}}/>
                                     </View>

@@ -13,7 +13,7 @@ import deviceInfo from '../../../utils/deviceInfo'
 import {MessageBarManager} from 'react-native-message-bar'
 import {BlurView, VibrancyView} from "react-native-blur";
 // import {StyleSheet} from '../../common'
-const playerHeight = 250;
+const playerHeight = 260;
 export default class MoviePlayer extends Component {
 
     constructor(props) {
@@ -156,21 +156,22 @@ export default class MoviePlayer extends Component {
                                 blurType={'light'}
                                 blurAmount={10}
                                 style={styles.container}
-                            /> :
-                            <BlurView
-                                style={styles.absolute}
-                                viewRef={this.state.viewRef}
-                                blurType="light"
-                                blurAmount={10}
-                            />
+                            /> :null
+
                     }
+                    {/*<BlurView*/}
+                    {/*style={styles.absolute}*/}
+                    {/*viewRef={this.state.viewRef}*/}
+                    {/*blurType="light"*/}
+                    {/*blurAmount={10}*/}
+                    {/*/>*/}
                 </View>
                 {/*播放内容*/}
                 <TouchableOpacity
                     activeOpacity={1}
                     style={[styles.movieContainer, { //横屏适配
                         height: orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
-                        marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? (deviceInfo.isIphoneX ? 40 : 20) : 0 : 0
+                        // marginTop: orientation === 'PORTRAIT' ?  (deviceInfo.isIphoneX ? 40 : 20) : 0
                     }]}
                     onPress={() => {this.isTouchedScreen()}}>
                     <Video source={{uri: url}}
@@ -194,6 +195,7 @@ export default class MoviePlayer extends Component {
                            onTimedMetadata={(data) => this.onTimedMetadata(data)}
                            style={[styles.videoPlayer]}
                     />
+                    {/*<View style={{height:(deviceInfo.isIphoneX ? 40 : 20),backgroundColor:commonStyle.black,width:deviceInfo.deviceWidth}}/>*/}
                     {
                         !isLock ?
                             <View style={styles.navContentStyle}>
@@ -315,13 +317,14 @@ export default class MoviePlayer extends Component {
                                     </View>
                                 </View>
                                 {
+                                    Platform.OS === 'ios' ?
                                     orientation === 'PORTRAIT' ?
                                         <TouchableOpacity onPress={Orientation.lockToLandscapeLeft}>
                                             <Icon name={'ios-expand'} size={18} color={commonStyle.white}/>
                                         </TouchableOpacity> :
                                         <TouchableOpacity onPress={Orientation.lockToPortrait}>
                                             <Icon name={'ios-contract'} size={18} color={commonStyle.white}/>
-                                        </TouchableOpacity>
+                                        </TouchableOpacity>:null
                                 }
                             </View> : <View style={{height: 40}}/>
                     }
@@ -350,12 +353,13 @@ const styles = StyleSheet.create({
         right: 0,
     },
     navContentStyle: {
-        height: 44,
+        height: 44+(deviceInfo.isIphoneX ? 40 : 20),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        backgroundColor: commonStyle.black
+        backgroundColor: commonStyle.black,
+        paddingTop: deviceInfo.isIphoneX ? 40 : 20
     },
     toolBarStyle: {
         backgroundColor: commonStyle.blackTranslucent,
