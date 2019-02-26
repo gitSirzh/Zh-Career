@@ -330,6 +330,8 @@ export default class MoviePlayer extends Component {
                     }
                     {this.renderModal()}
                 </TouchableOpacity>
+                {/*TODO 后续完善*/}
+                <Text style={{width:deviceInfo.deviceWidth,textAlign:commonStyle.center,color:commonStyle.black,fontSize:16,marginTop:180}}>* 后续完善 *</Text>
             </View>
         )
     }

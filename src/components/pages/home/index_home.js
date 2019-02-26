@@ -2,7 +2,8 @@
  * Created by jszh on 2018/12/27.
  */
 import React, {Component} from 'react'
-import {StyleSheet, View} from 'react-native'
+import {StyleSheet, View,Text} from 'react-native'
+import {commonStyle} from "../../../utils/commonStyle";
 
 
 class Home extends Component {
@@ -21,7 +22,7 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.containerStyle}>
-
+                <Text>Home</Text>
             </View>
         )
     }
@@ -31,6 +32,8 @@ const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
         backgroundColor: '#FFEBCD',
+        justifyContent: commonStyle.center,
+        alignItems:commonStyle.center
     },
 
 });
