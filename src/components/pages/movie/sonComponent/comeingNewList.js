@@ -57,6 +57,17 @@ export default class ShowTimeList extends Component {
         )
     }
 
+    // shouldComponentUpdate(nextProps,nextState){
+    //     if(this.state.dataSource !== nextState.dataSource){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    /**
+     * 即将上映
+     * @returns {*}
+     */
     render() {
         let dataSource = this.state.dataSource.cloneWithRows(this.props.comingNewArr);
         return (

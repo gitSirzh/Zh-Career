@@ -83,7 +83,9 @@ export default class ActorList extends BaseComponent {
         return (
             <View style={styles.container}>
                 <SectionList
-                    renderSectionHeader={this.renderSectionHeader}
+                    keyExtractor={(item,index)=>index.toString()}
+                    renderSectionHeader={this.renderSectionHeader}  //吸顶标题方法（iOS默认吸顶）
+                    stickySectionHeadersEnabled={true}              //打开Android平台吸顶标题
                     renderItem={this.renderItem}
                     sections={tempArr}
                     ItemSeparatorComponent={() => <View/>}

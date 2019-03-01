@@ -513,11 +513,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     footerBtn: {
-        height: 50,
+        height: 40,
         width: deviceInfo.deviceWidth,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
+        marginBottom: deviceInfo.isIphoneX?34:0,
     },
     playBtn: {
         height: 40,
@@ -535,7 +536,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.9)',
         alignItems:commonStyle.center,
         borderTopLeftRadius:6,
-        borderTopRightRadius:6
+        borderTopRightRadius:6,
     },
     modalTitleView: {
         height:35,
@@ -559,7 +560,8 @@ const styles = StyleSheet.create({
         alignItems: commonStyle.center,
         justifyContent:commonStyle.center,
         borderTopWidth: 0.5,
-        borderColor:commonStyle.drakGray
+        borderColor:commonStyle.drakGray,
+        marginBottom: deviceInfo.isIphoneX?34:0,
     },
     closeText: {
         fontSize:16,

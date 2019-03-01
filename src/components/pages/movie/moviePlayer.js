@@ -361,7 +361,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 10,
         backgroundColor: commonStyle.black,
-        paddingTop: deviceInfo.isIphoneX ? 40 : 20
+        paddingTop: deviceInfo.isIphoneX ? 40 : 20,
+        // borderColor: '#fff',
+        // borderWidth: 1
     },
     toolBarStyle: {
         backgroundColor: commonStyle.blackTranslucent,

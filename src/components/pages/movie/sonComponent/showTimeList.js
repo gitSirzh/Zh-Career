@@ -2,7 +2,7 @@
  * Created by jszh on 2018/12/29.
  */
 import React, {Component} from 'react'
-import {View, ListView, Image, Text, StyleSheet} from 'react-native'
+import {ListView,StyleSheet} from 'react-native'
 import {commonStyle} from '../../../../utils/commonStyle'
 import ShowTimeCell from './showTimeCell'
 
@@ -26,6 +26,17 @@ export default class ShowTimeList extends Component {
 
     }
 
+    // shouldComponentUpdate(nextProps,nextState){
+    //     if(this.state.dataSource !== nextState.dataSource){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    /**
+     * 正在热映
+     * @returns {*}
+     */
     render() {
         let dataSource = this.state.dataSource.cloneWithRows(this.props.dataArr);
         return (

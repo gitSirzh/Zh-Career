@@ -37,7 +37,7 @@ export default class MovieDetail extends Component {
             >
                 <Image
                     style={{width: 80, height: 80}}
-                    source={{uri: item.img}}
+                    source={{uri: item.img?item.img:''}}
                 />
                 <Text numberOfLines={1} style={styles.actorStyle}>{item.name}</Text>
                 <Text numberOfLines={1} style={styles.actorStyle}>{item.nameEn}</Text>
@@ -56,7 +56,7 @@ export default class MovieDetail extends Component {
                 <View style={{borderColor: commonStyle.lineColor, borderWidth: 1}}>
                     <Image
                         style={{width: 100, height: 100}}
-                        source={{uri: item.image}}
+                        source={{uri: item.image?item.image:''}}
                     />
                     <Text style={{
                         position: 'absolute',
@@ -143,7 +143,7 @@ export default class MovieDetail extends Component {
                             this.backgroundImage = img
                         }}
                         style={styles.bgContainer}
-                        source={{uri: basic.img}}
+                        source={{uri: basic.img?basic.img:''}}
                         // resizeMode='stretch'
                         onLoadEnd={() => this.imageLoaded()}
                         blurRadius={Platform.OS === 'ios'?0:20}
@@ -176,7 +176,7 @@ export default class MovieDetail extends Component {
                             >
                                 <Image
                                     style={styles.img}
-                                    source={{uri: basic.img}}
+                                    source={{uri: basic.img?basic.img:''}}
                                     resizeMode='contain'
                                 />
                                 <View style={{position: commonStyle.absolute}}>
@@ -189,11 +189,7 @@ export default class MovieDetail extends Component {
                                     fontSize: 16,
                                     marginVertical: 5
                                 }}>{basic.name}</Text>
-                                <Text style={{
-                                    color: Platform.OS === 'ios' ? commonStyle.white : commonStyle.black,
-                                    fontSize: 13,
-                                    marginBottom: 8
-                                }}>{basic.nameEn}</Text>
+                                <Text style={{color: Platform.OS === 'ios' ? commonStyle.white : commonStyle.black, fontSize: 13, marginBottom: 8}} numberOfLines={Platform.OS === 'ios'?1:0}>{basic.nameEn}</Text>
                                 <View style={{flexDirection: 'row'}}>
                                     {
                                         basic.isEggHunt ?
@@ -331,7 +327,7 @@ export default class MovieDetail extends Component {
                                         onPress={() => {alert('直播哟')}}>
                                         <Image
                                             style={{width: 100, height: 60}}
-                                            source={{uri: live.img}}
+                                            source={{uri: live.img?live.img:''}}
                                             resizeMode='contain'
                                         />
                                         <View style={{flex: 1, marginLeft: 10}}>
@@ -387,7 +383,7 @@ export default class MovieDetail extends Component {
                                 >
                                     <Image
                                         style={{height: 120, width: deviceInfo.deviceWidth - 150}}
-                                        source={{uri: video.img}}
+                                        source={{uri: video.img?video.img:''}}
                                         resizeMode='cover'
                                     />
                                     <View style={{position: commonStyle.absolute}}>
@@ -419,7 +415,7 @@ export default class MovieDetail extends Component {
                                 <View style={{marginRight: 10, paddingRight: 10, backgroundColor: 'red'}}>
                                     <Image
                                         style={{width: 110, height: 120}}
-                                        source={{uri: basic.stageImg.list[0].imgUrl}}
+                                        source={{uri: basic.stageImg.list[0].imgUrl?basic.stageImg.list[0].imgUrl:''}}
                                         resizeMode='cover'
                                     />
                                 </View>
@@ -526,10 +522,10 @@ export default class MovieDetail extends Component {
                     <TouchableOpacity
                         style={{
                             flex: 1,
+                            height: 49,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            backgroundColor: '#F37207',
-                            height: 49
+                            backgroundColor: '#F37207'
                         }}
                         onPress={() => {
                             alert('不，你不想买票')
@@ -587,12 +583,12 @@ const styles = StyleSheet.create({
     },
     bgContainer: {
         position: 'absolute',
-        height: 120,
+        height: deviceInfo.isIphoneX?155:130,
         width: deviceInfo.deviceWidth,
     },
     contentStyle: {
         flex: 1,
-        marginTop: Platform.OS === 'ios' ? 120 : 70,
+        marginTop: Platform.OS === 'ios' ? (deviceInfo.isIphoneX?155:130) : 70,
         backgroundColor: commonStyle.white,
     },
     headerStyle: {
@@ -629,7 +625,7 @@ const styles = StyleSheet.create({
     actorStyle: {
         fontSize: 12,
         color: commonStyle.textBlockColor,
-        marginTop: 5
+        marginTop: 2
     },
     liveContent: {
         flexDirection: 'row',
@@ -667,17 +663,18 @@ const styles = StyleSheet.create({
     bottomToolBar: {
         flexDirection: 'row',
         height: 49,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: deviceInfo.isIphoneX?34:0,
     },
     navBarStyle: {
-        height: 64,
+        height: commonStyle.navHeight,
         backgroundColor: '#161C28',
         position: 'absolute',
         width: deviceInfo.deviceWidth,
     },
     navComtentStyle: {
-        height: 44,
-        marginTop: 20,
+        height: commonStyle.navContentHeight,
+        marginTop: commonStyle.navStatusBarHeight,
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,

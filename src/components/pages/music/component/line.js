@@ -13,7 +13,7 @@ export default class Line extends Component {
                 <View style={[styles.container,{width: deviceInfo.deviceWidth - 100, height: 0.34811, backgroundColor: 'rgba(220,220,220,0.5)'}]}>
                     <View style={[styles.container,{width: deviceInfo.deviceWidth - 110, height: 0.34812, backgroundColor: 'rgba(220,220,220,0.5)'}]}>
                         <View style={[styles.container,{width: deviceInfo.deviceWidth - 140, height: 0.34813, backgroundColor: 'rgba(220,220,220,0.7)'}]}>
-                            <View style={{width: deviceInfo.deviceWidth - 200, height: 0.7, backgroundColor: 'rgba(220,220,220,0.8)'}}/>
+                            <View style={{width: deviceInfo.deviceWidth - 200, height: 0.4, backgroundColor: 'rgba(220,220,220,0.8)'}}/>
                         </View>
                     </View>
                 </View>
