@@ -36,9 +36,9 @@ import WebView from '../components/common/webView'
 /**============音乐============**/
 import MusicPlayer from '../components/pages/music/musicPlayer'
 /**============电影============**/
-import MovieDetail from '../components/pages/movie/movieDetail'
-import MoviePlayer from '../components/pages/movie/moviePlayer'
-import TrailerList from '../components/pages/movie/movieTrailerList'
+import MovieDetail from '../components/pages/movie/movieComment/movieDetail'
+import MoviePlayer from '../components/pages/movie/movieComment/moviePlayer'
+import TrailerList from '../components/pages/movie/movieComment/movieTrailerList'
 // import MiniCommentList from '../components/pages/movie/comment/miniCommentList'
 // import PlusCommentList from '../components/pages/movie/comment/plusCommentList'
 import ActorList from '../components/pages/movie/actor/actorList'

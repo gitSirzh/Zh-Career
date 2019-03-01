@@ -3,14 +3,14 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, Platform, findNodeHandle} from 'react-native'
-import {commonStyle} from '../../../utils/commonStyle'
+import {commonStyle} from '../../../../utils/commonStyle'
 import {VibrancyView, BlurView} from 'react-native-blur'
-import deviceInfo from '../../../utils/deviceInfo'
+import deviceInfo from '../../../../utils/deviceInfo'
 import Icon from 'react-native-vector-icons/Ionicons'
-import MiniComment from './comment/miniCommentCell'
-import PlusComment from './comment/plusCommentCell'
+import MiniComment from '../comment/miniCommentCell'
+import PlusComment from '../comment/plusCommentCell'
 import {Actions} from 'react-native-router-flux'
-import {ShareModal} from '../../../components/common/shareModal'
+import {ShareModal} from '../../../common/shareModal/index'
 
 export default class MovieDetail extends Component {
 

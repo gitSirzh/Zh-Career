@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     container: {
         width: deviceInfo.deviceWidth,
         height: 0.35,
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: commonStyle.transparent,
         alignItems: commonStyle.center,
         justifyContent: commonStyle.center
     }

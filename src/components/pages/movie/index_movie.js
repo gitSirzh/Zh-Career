@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
 const _MovieList = connect(
     (state) => state.movie.movieList,
     Action.dispatch('movie')
-)(Movie)
+)(Movie);
 
 export default _MovieList

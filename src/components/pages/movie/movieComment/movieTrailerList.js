@@ -3,16 +3,16 @@
  */
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, Image, ListView, StyleSheet} from 'react-native'
-import {commonStyle} from '../../../utils/commonStyle'
-import {BaseComponent} from '../../base/baseComponent'
+import {commonStyle} from '../../../../utils/commonStyle'
+import {BaseComponent} from '../../../base/baseComponent'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {Actions} from 'react-native-router-flux'
 
 export default class TrailerList extends BaseComponent {
 
     constructor(props) {
-        super(props)
-        this.renderRow = this.renderRow.bind(this)
+        super(props);
+        this.renderRow = this.renderRow.bind(this);
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
         }
@@ -30,7 +30,7 @@ export default class TrailerList extends BaseComponent {
                 color: commonStyle.white
             },
             navBarStyle: {
-                backgroundColor: '#151C28',
+                backgroundColor: commonStyle.inkBlack,
             }
         }
     }
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
         width: 100,
         height: 60
     }
-})
+});
