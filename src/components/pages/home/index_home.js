@@ -4,9 +4,10 @@
 import React, {Component} from 'react'
 import {StyleSheet, View,Text} from 'react-native'
 import {commonStyle} from "../../../utils/commonStyle";
+import {BaseComponent} from "../../base/baseComponent";
 
 
-class Home extends Component {
+class Home extends BaseComponent {
 
     constructor(props) {
         super(props);
@@ -14,12 +15,24 @@ class Home extends Component {
 
         }
     }
+    navigationBarProps() {
+        return {
+            title: '首页',
+            hiddenLeftItem: true,
+            navBarStyle:{
+                backgroundColor:commonStyle.inkBlack
+            },
+            titleStyle:{
+                color: commonStyle.navThemeColor
+            }
+        }
+    }
 
     componentDidMount() {
 
     }
 
-    render() {
+    _render() {
         return (
             <View style={styles.containerStyle}>
                 <Text>Home</Text>

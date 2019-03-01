@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
         color: commonStyle.black,
         marginBottom: 5
     }
-})
+});

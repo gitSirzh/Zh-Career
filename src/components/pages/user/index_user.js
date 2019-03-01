@@ -4,12 +4,27 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import {commonStyle} from "../../../utils/commonStyle";
-class User extends Component {
+import {BaseComponent} from "../../base/baseComponent";
+
+class User extends BaseComponent {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
 
+        }
+    }
+
+    navigationBarProps() {
+        return {
+            title: '用户',
+            hiddenLeftItem: true,
+            navBarStyle:{
+                backgroundColor:commonStyle.inkBlack
+            },
+            titleStyle:{
+                color: commonStyle.navThemeColor
+            }
         }
     }
 
@@ -17,7 +32,7 @@ class User extends Component {
 
     }
 
-    render() {
+    _render() {
         return (
             <View style={styles.containerStyle}>
                 <Text>User</Text>

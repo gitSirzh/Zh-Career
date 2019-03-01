@@ -3,17 +3,18 @@
  */
 import React, {Component} from 'react'
 import {View, StyleSheet, Text, TouchableOpacity, FlatList,Image} from 'react-native'
+
 // import ViewPager from 'react-native-viewpager'
+// import action from '../../../actionCreators/music'
+// import {articleType, beginTime} from '../../../constants/commonType'
+// import MusicDetail from './musicDetail'
+
 import {BaseComponent} from '../../../components/base/baseComponent'
 import {connect} from 'react-redux'
-// import MusicDetail from './musicDetail'
 import Action from '../../../actions'
 import {Actions} from 'react-native-router-flux'
-import action from '../../../actionCreators/music'
-import {articleType, beginTime} from '../../../constants/commonType'
 import {commonStyle} from '../../../utils/commonStyle'
 import deviceInfo from '../../../utils/deviceInfo'
-
 import musicList from '../../../assets/data/musicList1'
 
 class Music extends BaseComponent {
@@ -32,8 +33,12 @@ class Music extends BaseComponent {
         return {
             title: 'MUSIC',
             hiddenLeftItem: true,
-            navBarStyle:{backgroundColor:commonStyle.black},
-            titleStyle:{color: commonStyle.navThemeColor}
+            navBarStyle:{
+                backgroundColor:commonStyle.inkBlack
+            },
+            titleStyle:{
+                color: commonStyle.navThemeColor
+            }
         }
     }
 
