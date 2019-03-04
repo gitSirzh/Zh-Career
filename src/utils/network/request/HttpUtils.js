@@ -16,7 +16,7 @@ import {RootHUD} from '../../progressHUD'
 let header = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-}
+};
 
 /**
  * GET 请求时，拼接请求URL
@@ -26,7 +26,7 @@ let header = {
  */
 const handleUrl = url => params => {
     if (params) {
-        let paramsArray = []
+        let paramsArray = [];
         Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
         if (url.search(/\?/) === -1) {
             typeof (params) === 'object' ? url += '?' + paramsArray.join('&') : url
@@ -35,7 +35,7 @@ const handleUrl = url => params => {
         }
     }
     return url
-}
+};
 
 /**
  * fetch 网络请求超时处理
@@ -49,7 +49,7 @@ const timeoutFetch = (original_fetch, timeout = 30000) => {
     let timeout_promise = new Promise((resolve, reject) => {
         timeoutBlock = () => {
             // 请求超时处理
-            reject('timeout promise')
+            reject('请求超时，请稍后再试')
         }
     });
 
@@ -125,7 +125,7 @@ export default class HttpUtils extends Component {
                 }
             })
             .then((response) => {
-                RootHUD.hidden()
+                RootHUD.hidden();
                 if (response && response.res === responseType.RESPONSE_SUCCESS) {
                     return response
                 } else {

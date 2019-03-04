@@ -4668,6 +4668,10 @@ react-native-collapsible@^0.8.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-device-info@^0.26.4:
+  version "0.26.4"
+  resolved "http://registry.npm.taobao.org/react-native-device-info/download/react-native-device-info-0.26.4.tgz#5d747fae91d5abceff2de5430ff92749a09c62dd"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/react-native-dismiss-keyboard/download/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
