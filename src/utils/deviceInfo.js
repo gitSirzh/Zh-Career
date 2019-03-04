@@ -22,3 +22,4 @@ export default deviceInfo = {
     // 当前config: debug \ release
     mode: __DEV__ ? 'xdebug' : 'release'
 }
+

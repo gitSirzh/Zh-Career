@@ -13,7 +13,7 @@ const sync = {
 
     user(params) {
         let {id, resolve, reject, syncParams: {extraFetchOptions, someFlag}} = params;
-        fetch('http://www.baidu.com', {
+        fetch('https://www.baidu.com', {
             method: 'GET',
             body: 'id=' + id,
             ...extraFetchOptions,

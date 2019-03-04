@@ -6,7 +6,6 @@ import {StyleSheet, View,Text} from 'react-native'
 import {commonStyle} from "../../../utils/commonStyle";
 import {BaseComponent} from "../../base/baseComponent";
 
-
 class Home extends BaseComponent {
 
     constructor(props) {
