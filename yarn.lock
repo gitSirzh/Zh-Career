@@ -4789,6 +4789,12 @@ react-native-swipeout@~2.1.1:
   dependencies:
     react-tween-state "^0.1.5"
 
+react-native-swiper@^1.5.14:
+  version "1.5.14"
+  resolved "http://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-tab-navigator@^0.3.4:
   version "0.3.4"
   resolved "http://registry.npm.taobao.org/react-native-tab-navigator/download/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"

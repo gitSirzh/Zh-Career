@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, Text, View} from 'react-native'
-import {commonStyle} from "../../../utils/commonStyle";
-import {BaseComponent} from "../../base/baseComponent";
+import {commonStyle} from "../../../utils/commonStyle"
+import {BaseComponent} from "../../base/baseComponent"
 
 class User extends BaseComponent {
 

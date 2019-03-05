@@ -3,8 +3,10 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, View,Text} from 'react-native'
-import {commonStyle} from "../../../utils/commonStyle";
-import {BaseComponent} from "../../base/baseComponent";
+import {commonStyle} from "../../../utils/commonStyle"
+import {BaseComponent} from '../../../components/base/baseComponent'
+import {deviceInfo} from "../../../utils/index_utils";
+import Swiper from '../../common/swiper/index'
 
 class Home extends BaseComponent {
 
@@ -14,6 +16,7 @@ class Home extends BaseComponent {
             ip:''
         }
     }
+
     navigationBarProps() {
         return {
             title: '首页',
@@ -38,9 +41,24 @@ class Home extends BaseComponent {
      * @private
      */
     _render() {
+        let data = [1,2,3,4,5,6];
         return (
             <View style={styles.containerStyle}>
-                <Text>Home</Text>
+                <Swiper
+                    viewStyle={{marginTop:10}}
+                    centerMethod={
+                        data.map((item,index)=>{
+                            return(
+                                <View key={index} style={{width:deviceInfo.deviceWidth,alignItems: commonStyle.center}}>
+                                    <View style={{borderRadius:10,marginTop:5,width:deviceInfo.deviceWidth-30,height:110,backgroundColor:commonStyle.yellow,alignItems:commonStyle.center,justifyContent: commonStyle.center}}>
+                                        <Text style={{fontSize:16,color: commonStyle.inkBlack}}>{item}</Text>
+                                    </View>
+                                </View>
+                            )
+                        })
+                    }
+                    paginationStyle={{bottom: 6}}
+                />
             </View>
         )
     }
@@ -49,10 +67,12 @@ class Home extends BaseComponent {
 const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor: '#FFEBCD',
-        justifyContent: commonStyle.center,
+        backgroundColor: commonStyle.bgColor,
         alignItems:commonStyle.center
     },
+    wrapperContainer:{
+        height:200
+    }
 
 });
 

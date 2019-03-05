@@ -33,6 +33,7 @@ export const commonStyle = {
     clear: 'transparent',
     transparent: 'rgba(0,0,0,0)',    //全部透明
     blackTranslucent: 'rgba(0,0,0,0.5)',    //黑色半透明
+    twoTranslucent: 'rgba(0,0,0,0.2)',    //透明(0.2)
 
     /** 主题色 **/
     themeColor: '#e74c3c',

@@ -108,7 +108,7 @@ class Music extends BaseComponent {
                     ListFooterComponent={()=>{
                         return(
                             <View style={{backgroundColor:'#c5c5c5',marginBottom: commonStyle.tabBarHeight+15,width:deviceInfo.deviceWidth,height:30,justifyContent:commonStyle.center,alignItems:commonStyle.center}}>
-                                <Text style={{color:commonStyle.PeachPuff,fontSize:13,fontWeight:'300'}}>{footTitle}</Text>
+                                <Text style={{color:commonStyle.inkBlack,fontSize:12}}>{footTitle}</Text>
                             </View>
                         )
                     }}
