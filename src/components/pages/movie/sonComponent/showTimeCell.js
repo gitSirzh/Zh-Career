@@ -65,8 +65,8 @@ export default class ShowTimeCell extends Component {
                     <View style={{justifyContent: 'space-around'}}>
                         {
                             !data.isNew && data.r !== -1 ?
-                                <TouchableOpacity style={{backgroundColor:commonStyle.lightGreen, borderRadius: 5}}>
-                                    <Text style={{paddingVertical: 5, paddingHorizontal: 10, color: '#fff', fontSize: 14}}>
+                                <TouchableOpacity style={{alignItems:commonStyle.center,justifyContent:commonStyle.center,width:45,height: 25,backgroundColor:commonStyle.lightGreen, borderRadius: 5}}>
+                                    <Text style={{color: '#fff', fontSize: 14}}>
                                         {data.r}
                                         <Text style={{fontSize: 10, color: commonStyle.white}}>分</Text>
                                     </Text>
