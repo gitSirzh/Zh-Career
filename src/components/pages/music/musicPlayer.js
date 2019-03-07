@@ -252,7 +252,7 @@ class musicPlayer extends Component {
                 style={{flex:1, alignItems: 'center'}}
             >
                 {/*导航条*/}
-                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} title={musicInfo.xsong_name}/>
+                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} textRoll={true} title={musicInfo.xsong_name}/>
                 {/*分割线 line*/}
                 <Line/>
                 {/*中部 - 旋转*/}
@@ -445,8 +445,9 @@ class musicPlayer extends Component {
                                             },300);
                                         }}
                                     >
-                                        <View><Text style={[styles.musicName,{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}]}>{data.xsong_name}</Text></View>
-                                        <View><Text style={[styles.musicName,{color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}]}> - {data.xsinger_name}</Text></View>
+                                        <View>
+                                            <Text style={{fontSize:14,color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}} numberOfLines={1}>{data.xsong_name} - {data.xsinger_name}</Text>
+                                        </View>
                                     </TouchableOpacity>
                                 )
                             })}
@@ -477,7 +478,7 @@ class musicPlayer extends Component {
 
     //显示/隐藏 播放列表
     showModal(){
-        this.setState({show:!this.state.show})
+        this.setState({show:!this.state.show});
     }
 
     componentDidMount() {

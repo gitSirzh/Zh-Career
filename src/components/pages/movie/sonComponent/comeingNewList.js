@@ -7,6 +7,7 @@ import {commonStyle} from '../../../../utils/commonStyle'
 import ComingNewCell from './comeingnewCell'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {Actions} from 'react-native-router-flux'
+import deviceInfo from "../../../../utils/deviceInfo";
 export default class ShowTimeList extends Component {
 
     constructor(props) {
@@ -35,7 +36,7 @@ export default class ShowTimeList extends Component {
                     style={{width: 80, height: 120}}
                     source={{uri: item.image}}
                 />
-                <Text numberOfLines={1} style={{fontSize: 12, marginVertical: 6, color: commonStyle.textBlockColor}}>{item.title}</Text>
+                <Text numberOfLines={1} style={{fontSize: 12, marginVertical: deviceInfo.isIOS?6:3, color: commonStyle.textBlockColor}}>{item.title}</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                     <Text style={{fontSize: 11, color: commonStyle.textGrayColor}}>{`${item.wantedCount}人想看`}</Text>
                     <Icon name={'ios-heart'} size={15} color={'#F86728'}/>

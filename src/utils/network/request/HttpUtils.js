@@ -43,7 +43,7 @@ const handleUrl = url => params => {
  * @param timeout 超时时间 30s
  * @returns {Promise.<*>}
  */
-const timeoutFetch = (original_fetch, timeout = 30000) => {
+const timeoutFetch = (original_fetch, timeout = 60000) => {
     let timeoutBlock = () => {
     };
     let timeout_promise = new Promise((resolve, reject) => {

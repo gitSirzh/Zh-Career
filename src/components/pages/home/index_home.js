@@ -45,7 +45,7 @@ class Home extends BaseComponent {
         return (
             <View style={styles.containerStyle}>
                 <Swiper
-                    viewStyle={{marginTop:10}}
+                    viewStyle={styles.wrapperContainer}
                     centerMethod={
                         data.map((item,index)=>{
                             return(
@@ -59,6 +59,8 @@ class Home extends BaseComponent {
                     }
                     paginationStyle={{bottom: 6}}
                 />
+                {/*TODO*/}
+                <Text>//TODO</Text>
             </View>
         )
     }
@@ -71,7 +73,8 @@ const styles = StyleSheet.create({
         alignItems:commonStyle.center
     },
     wrapperContainer:{
-        height:200
+        width:deviceInfo.deviceWidth,
+        marginTop:10
     }
 
 });

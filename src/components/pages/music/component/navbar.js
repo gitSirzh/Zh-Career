@@ -1,6 +1,16 @@
 
 /**
  * Created by jszh on 2019/2/20
+ *
+ * Explain：⬇️
+ *
+ *  backCallback    function    //返回事件
+ *  renderLeft      function    //左侧事件 注：不可和返回事件一起使用
+ *  renderRight     function    //右侧返回事件
+ *  centerColor     string      //背景色
+ *  textColor       string      //标题颜色
+ *  textRoll        boolean     //标题滚动  true：滚动
+ *  title           string      //标题
  */
 
 import React,{Component} from 'react'
@@ -8,6 +18,7 @@ import {View, StyleSheet, TouchableOpacity, Text} from 'react-native'
 import deviceInfo from '../../../../utils/deviceInfo'
 import {commonStyle} from '../../../../utils/commonStyle'
 import Icon from "react-native-vector-icons/Ionicons"
+import MarqueeLabel from '../../../common/text/textRoll/index'
 
 class Navbar extends Component {
     constructor(props) {
@@ -32,14 +43,23 @@ class Navbar extends Component {
                     {this.renderLeft()}
                 </View>
 
-                <View
-                    style={[styles.middle, {backgroundColor: this.props.centerColor ? this.props.centerColor : this.state.colors ? this.state.colors : commonStyle.main}]}>
-                    <Text
-                        style={{fontSize: 16 , fontWeight: '400', color: this.props.textColor ? this.props.textColor : commonStyle.white}}
-                    >
-                        {this.props.title}</Text>
-                    {this.props.children}
-                </View>
+                {this.props.textRoll? (
+                    <View style={[styles.middle, {backgroundColor: this.props.centerColor ? this.props.centerColor : this.state.colors ? this.state.colors : commonStyle.main}]}>
+                            <MarqueeLabel
+                                style={{height:30,borderWidth: 1}}
+                                duration={8000}
+                                text={this.props.title}
+                                textStyle={{fontSize: 16 , fontWeight: '400', color: this.props.textColor ? this.props.textColor : commonStyle.white}}
+                            />
+                        {this.props.children}
+                    </View>
+                    ):(
+                    <View style={[styles.middle, {backgroundColor: this.props.centerColor ? this.props.centerColor : this.state.colors ? this.state.colors : commonStyle.main}]}>
+                        <Text style={{fontSize: 16 , fontWeight: '400', color: this.props.textColor ? this.props.textColor : commonStyle.white}}>{this.props.title}</Text>
+                        {this.props.children}
+                    </View>
+                    )}
+
 
                 <View
                     style={[styles.beside, {backgroundColor: this.props.centerColor ? this.props.centerColor : this.state.colors ? this.state.colors : commonStyle.main}]}>
@@ -115,7 +135,7 @@ const styles = StyleSheet.create({
         height: commonStyle.navContentHeight,
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row',
+        // flexDirection: 'row',
     },
 
     navBack: {

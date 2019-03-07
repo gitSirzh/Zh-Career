@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
             position: 'absolute',
             backgroundColor: 'rgba(0,0,0,0.3)',
             width: deviceInfo.deviceWidth,
-            height: deviceInfo.deviceHeight,
+            height: deviceInfo.isIOS?deviceInfo.deviceHeight:deviceInfo.deviceHeight+30,
             alignItems: 'center',
             justifyContent: 'center'
         },

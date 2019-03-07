@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
         width: deviceInfo.deviceWidth - 70 - 50,
         flex: 1
     }
-})
+});
