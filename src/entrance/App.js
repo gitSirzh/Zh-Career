@@ -3,7 +3,8 @@
  */
 
 import React, {Component} from 'react';
-import {View} from "react-native"
+import {View,Platform} from "react-native"
+var TimerMixin = require('react-timer-mixin');
 
 /**============状态管理器============**/
 import store from '../store/index_store'
@@ -47,6 +48,7 @@ import PictureList from '../components/pages/movie/picture/pictureList'
 /**============我的============**/
 
 import MessageBar from "../utils/messageBar/MessageBar"
+import SplashScreen from "react-native-splash-screen";
 
 //创建stateReducer
 const reducerCreate = params => {
@@ -219,6 +221,16 @@ const scenes = Actions.create(
 
 //创建 App
 class App extends Component {
+    componentDidMount() {
+        //启动页
+        if(Platform.OS === 'ios'){
+
+        }else{
+            TimerMixin.setTimeout(() => {
+                SplashScreen.hide();
+            },2000);
+        }
+    }
     render() {
         return (
             <View style={{flex: 1}}>

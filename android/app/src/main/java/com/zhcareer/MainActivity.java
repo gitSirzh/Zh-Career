@@ -1,9 +1,17 @@
 package com.zhcareer;
 
+import android.Manifest;
 import com.facebook.react.ReactActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+
+import com.cboy.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,9 +20,18 @@ public class MainActivity extends ReactActivity {
         super.onCreate(savedInstanceState);
 
         //Exit.activity = this;
+        int permissionCheck = ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            // ask permissions here using below code
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},3000);
+        }
+        SplashScreen.show(this,true);
+
 
         //沉浸式状态栏
         initState();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     //沉浸式状态栏
