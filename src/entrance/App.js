@@ -13,7 +13,7 @@ import {Scene, Router, Actions, Reducer, ActionConst, Modal, Stack, Lightbox} fr
 import Action from '../actions'
 import {dispatch} from '../utils/allLog/dispatchLog'
 import type from '../constants/actionType'
-import {commonStyle} from '../utils/index_utils'
+import {initUserInfo} from '../utils/userInfo'
 
 /**============路由页============**/
 import TabBar from './TabBar'
@@ -36,6 +36,7 @@ import WebView from '../components/common/webView'
 
 /**============音乐============**/
 import MusicPlayer from '../components/pages/music/musicPlayer'
+import SearchMusic from '../components/pages/music/searchMusic'
 /**============电影============**/
 import MovieDetail from '../components/pages/movie/movieComment/movieDetail'
 import MoviePlayer from '../components/pages/movie/movieComment/moviePlayer'
@@ -85,6 +86,7 @@ const scenes = Actions.create(
                         (state) => state.music.music,
                         Action.dispatch('music')
                     )(MusicPlayer)}/>
+                    <Scene key="searchMusic" component={SearchMusic} hideNavBar/>
                     {/*================电影================*/}
                     <Scene key="movieDetail" hideNavBar component={connect(
                         (state) => state.movie.movieDetail,
@@ -222,6 +224,10 @@ const scenes = Actions.create(
 //创建 App
 class App extends Component {
     componentDidMount() {
+
+        //注册用户本地信息
+        initUserInfo(()=>{});
+
         //启动页
         if(Platform.OS === 'ios'){
 

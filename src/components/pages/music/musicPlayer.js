@@ -1,4 +1,3 @@
-
 /**
  * Created by jszh on 2019/2/21
  */
@@ -220,7 +219,7 @@ class musicPlayer extends Component {
             '不看下右下角的列表吗?\n退出去音乐也停止播放了呦!',
             [
                 {text: '再听听', onPress: () => '再听听', style: 'cancel'},
-                {text: '退出', onPress: () => {Actions.pop()}},
+                {text: '退出', onPress: () => {Actions.popTo('main')}},
             ],
             { cancelable: false }
         )
@@ -233,12 +232,13 @@ class musicPlayer extends Component {
          * 2.歌曲名称 为title
          * 3.歌手名字
          **/
+        let data = this.props;
 
-        //动画范围 * 360度旋转一周
+        //动画范围 * 360度旋转一周(0-360：为真转)
         let interpolatedAnimation = this.state.imgRotate.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '360deg']
-        });
+                inputRange: [0, 1],
+                outputRange: ['0deg', '360deg']
+            });
 
         //开始暂停
         let st = this.state.playing ? 'ios-pause-outline' : 'ios-play-outline';
@@ -248,11 +248,11 @@ class musicPlayer extends Component {
         return (
             <ImageBackground
                 blurRadius={66}
-                source={{uri: musicInfo.cover}}
+                source={{uri: data.cover?data.cover:musicInfo.cover}}
                 style={{flex:1, alignItems: 'center'}}
             >
                 {/*导航条*/}
-                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} textRoll={true} title={musicInfo.xsong_name}/>
+                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} textRoll={true} title={data.xsong_name?data.xsong_name:musicInfo.xsong_name}/>
                 {/*分割线 line*/}
                 <Line/>
                 {/*中部 - 旋转*/}
@@ -274,7 +274,7 @@ class musicPlayer extends Component {
                                     >
                                         <Text style={{marginTop: 260, fontSize: 12, color: commonStyle.white}}>这里是歌词，正在实现此功能</Text>
                                         {/*{lyricArr.map((v, i) => (*/}
-                                            {/*<Normal color={v === currentLrc ?commonStyle.main?commonStyle.main:'#0882ff':'#fff'} key={i} style={{paddingTop: 5, paddingBottom: 5}}>{v.replace(/\[.*\]/g, '')}</Normal>*/}
+                                        {/*<Normal color={v === currentLrc ?commonStyle.main?commonStyle.main:'#0882ff':'#fff'} key={i} style={{paddingTop: 5, paddingBottom: 5}}>{v.replace(/\[.*\]/g, '')}</Normal>*/}
                                         {/*))}*/}
                                     </ScrollView>
                                 </View>)
@@ -299,7 +299,7 @@ class musicPlayer extends Component {
                                 }}>
                                     <Animated.Image
                                         //source={{uri: detail.al && detail.al.picUrl + '?param=200y200'}}
-                                        source={{uri: musicInfo.cover}}
+                                        source={{uri: data.cover?data.cover:musicInfo.cover}}
                                         style={[{
                                             width: deviceInfo.deviceWidth - 152,
                                             height: deviceInfo.deviceWidth - 152,
@@ -393,7 +393,7 @@ class musicPlayer extends Component {
                     {/*播放器组件*/}
                     <Video
                         ref={video => this.player = video}
-                        source={{uri: musicInfo.url}}
+                        source={{uri: data.url?data.url:musicInfo.url}}
                         volume={1.0}
                         paused={this.state.paused}
                         onLoadStart={this.loadStart}
@@ -418,47 +418,50 @@ class musicPlayer extends Component {
                     // scrollOffset={this.state.scrollOffset}
                     // scrollOffsetMax={40*mockList.list.length-400} // content height - ScrollView height
                 >
-                    <View style={styles.modalView}>
-                        <View style={styles.modalTitleView}>
-                            {/*<Icon style={{marginTop: 3}} name="ios-arrow-dropdown" size={22} color={commonStyle.white}/>*/}
-                            {/*<Text style={{color: commonStyle.white,fontSize: 14}}> 向下滑动关闭</Text>*/}
-                            <Text style={{color: commonStyle.lightGray,fontSize: 15}}>所有歌曲都在这里哟</Text>
+                    <View style={styles.modal}>
+                        <TouchableOpacity style={{flex:1}} activeOpacity={1} onPress={()=>{this.setState({show: false })}}/>
+                        <View style={styles.modalView}>
+                            <View style={styles.modalTitleView}>
+                                {/*<Icon style={{marginTop: 3}} name="ios-arrow-dropdown" size={22} color={commonStyle.white}/>*/}
+                                {/*<Text style={{color: commonStyle.white,fontSize: 14}}> 向下滑动关闭</Text>*/}
+                                <Text style={{color: commonStyle.lightGray,fontSize: 15}}>所有歌曲都在这里哟</Text>
+                            </View>
+                            <ScrollView
+                                ref={ref => (this.scrollViewRef = ref)}
+                                onScroll={this.handleOnScroll}
+                                scrollEventThrottle={0}
+                                style={{width:deviceInfo.deviceWidth}}
+                            >
+                                {mockList.list.map((data,index)=>{
+                                    return(
+                                        <TouchableOpacity
+                                            key={index}
+                                            style={styles.scrollableModalContent}
+                                            onPress={() =>{
+                                                this.setState({currentIndex:index,show: false});
+                                                //延迟播放
+                                                setTimeout(()=>{
+                                                    if(this.state.paused){
+                                                        this.playing();
+                                                    }
+                                                },300);
+                                            }}
+                                        >
+                                            <View>
+                                                <Text style={{fontSize:14,color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}} numberOfLines={1}>{data.xsong_name} - {data.xsinger_name}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    )
+                                })}
+                            </ScrollView>
+                            <TouchableOpacity
+                                activeOpacity={0.6}
+                                style={styles.closeBtn}
+                                onPress={() =>{this.setState({show: false })}}
+                            >
+                                <Text style={styles.closeText}>关闭</Text>
+                            </TouchableOpacity>
                         </View>
-                        <ScrollView
-                            ref={ref => (this.scrollViewRef = ref)}
-                            onScroll={this.handleOnScroll}
-                            scrollEventThrottle={0}
-                            style={{width:deviceInfo.deviceWidth}}
-                        >
-                            {mockList.list.map((data,index)=>{
-                                return(
-                                    <TouchableOpacity
-                                        key={index}
-                                        style={styles.scrollableModalContent}
-                                        onPress={() =>{
-                                            this.setState({currentIndex:index,show: false});
-                                            //延迟播放
-                                            setTimeout(()=>{
-                                                if(this.state.paused){
-                                                    this.playing();
-                                                }
-                                            },300);
-                                        }}
-                                    >
-                                        <View>
-                                            <Text style={{fontSize:14,color: this.state.currentIndex === index?commonStyle.cyan:commonStyle.lightGray}} numberOfLines={1}>{data.xsong_name} - {data.xsinger_name}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                )
-                            })}
-                        </ScrollView>
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            style={styles.closeBtn}
-                            onPress={() =>{this.setState({show: false })}}
-                        >
-                            <Text style={styles.closeText}>关闭</Text>
-                        </TouchableOpacity>
                     </View>
                 </Modal>
             </ImageBackground>
@@ -528,6 +531,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     modal: {
+        flex:1,
         justifyContent:commonStyle.end,
         margin: 0
     },

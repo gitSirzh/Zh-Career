@@ -128,8 +128,9 @@ export const commonStyle = {
     /** flex **/
     around: 'space-around',
     between: 'space-between',
+    wrap: 'wrap',
     center: 'center',
     row: 'row',
-    end: "flex-end"
-
+    end: "flex-end",
+    start: 'flex-start'
 };

@@ -70,7 +70,7 @@ export default class NavigationBar extends Component {
             )
         } else {
             tempComponent = (
-                <Icon name={'ios-arrow-back'} size={26} color={commonStyle.iconGray}/>
+                <Icon name={'ios-arrow-back'} size={26} color={commonStyle.navThemeColor}/>
             )
         }
         return (

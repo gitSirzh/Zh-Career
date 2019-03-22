@@ -1580,10 +1580,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hengguoApp.ZhCareer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jszh.ZhCareer;
 				PRODUCT_NAME = ZhCareer;
 				PROVISIONING_PROFILE = "479f4f38-e09e-4527-9d15-1ccb1769ce0d";
-				PROVISIONING_PROFILE_SPECIFIER = hengguoDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = hengguoIosDev;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1613,10 +1613,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hengguoApp.ZhCareer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jszh.ZhCareer;
 				PRODUCT_NAME = ZhCareer;
 				PROVISIONING_PROFILE = "479f4f38-e09e-4527-9d15-1ccb1769ce0d";
-				PROVISIONING_PROFILE_SPECIFIER = hengguoDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = hengguoIosDev;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

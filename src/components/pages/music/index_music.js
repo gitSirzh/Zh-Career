@@ -4,28 +4,21 @@
 import React, {Component} from 'react'
 import {View, StyleSheet, Text, TouchableOpacity, FlatList,Image} from 'react-native'
 
-// import ViewPager from 'react-native-viewpager'
-// import action from '../../../actionCreators/music'
-// import {articleType, beginTime} from '../../../constants/commonType'
-// import MusicDetail from './musicDetail'
-
 import {BaseComponent} from '../../../components/base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {Actions} from 'react-native-router-flux'
 import {commonStyle} from '../../../utils/commonStyle'
 import deviceInfo from '../../../utils/deviceInfo'
+
 import musicList from '../../../assets/data/musicList1'
 
 class Music extends BaseComponent {
 
     constructor(props) {
         super(props);
-        // this.renderPage = this.renderPage.bind(this);
-        // this.onChangePage = this.onChangePage.bind(this);
         this.state = {
-            // dataSource: new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2}),
-            // pageNum: 0
+            playlist:false,
         }
     }
 
@@ -38,41 +31,25 @@ class Music extends BaseComponent {
             },
             titleStyle:{
                 color: commonStyle.navThemeColor
+            },
+            rightIcon:{
+                name:'ios-search',
+                size:26,
+                color:commonStyle.navThemeColor
             }
         }
     }
 
-    componentDidMount() {
-        // action.musicIdList().then(response => {
-        //     this.setState({
-        //         dataSource: this.state.dataSource.cloneWithPages(response.data),
-        //         pageNum: response.data.length - 1
-        //     })
-        // })
+    onRightPress(){
+        Actions.searchMusic();
     }
 
-    // renderPage(rowData, rowId) {
-    //     return (
-    //         <MusicDetail {...this.props} key={rowId} id={parseInt(rowData)}/>
-    //     )
-    // }
-    //
-    // onChangePage(index) {
-    //     index === this.state.pageNum ? Actions.pastList({
-    //         beginTime: beginTime.music,
-    //         pageType: articleType.MUSIC
-    //     }) : null
-    // }
+    componentDidMount() {
+
+    }
 
     _render() {
         let footTitle = this.state.playlist?'恒果努力加载中...':'别扯了,到底了!';//恒果努力加载中...
-        // <ViewPager
-        //     style={styles.container}
-        //     onChangePage={this.onChangePage}
-        //     renderPage={this.renderPage}
-        //     dataSource={this.state.dataSource}
-        //     renderPageIndicator={false}
-        // />
         return (
             <View style={styles.container}>
                 <FlatList
@@ -120,6 +97,7 @@ class Music extends BaseComponent {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         backgroundColor:commonStyle.navThemeColor,
         justifyContent:commonStyle.center,
         alignItems:commonStyle.center

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "antd-mobile": "^1.6.11",
+    "querystring": "^0.2.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
     "react-native-blur": "^3.1.3",
