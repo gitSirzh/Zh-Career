@@ -1,5 +1,9 @@
 /**
  * Created by jszh on 2019/2/21
+ *
+ * Explain：⬇
+ *
+ * isListData: true:网络单个数据，false:打开本地列表数据
  */
 
 import React, {Component} from 'react';
@@ -17,21 +21,23 @@ import {
 } from 'react-native';
 
 import {MessageBarManager} from 'react-native-message-bar'
-import {Toast} from '../../../utils/toast/index'
+import {Toast} from '../../../../utils/toast/index'
 import Modal from 'react-native-modal'
 import Slider from 'react-native-slider'
 import Icon from 'react-native-vector-icons/Ionicons'
-import {Normal, Tip} from "../../../utils/a_player_util/TextComponent"
-import {commonStyle} from '../../../utils/commonStyle'
-import deviceInfo from '../../../utils/deviceInfo'
+import {Normal, Tip} from "../../../../utils/a_player_util/TextComponent"
+import {commonStyle} from '../../../../utils/commonStyle'
+import deviceInfo from '../../../../utils/deviceInfo'
 import Video from 'react-native-video'
-import Navbar from './component/navbar'
+import Navbar from '../component/navbar'
 import {Actions} from "react-native-router-flux"
-import {formatTime} from "../../../utils/formatTime"
-import Line from './component/line'
+import {formatTime} from "../../../../utils/formatTime"
+import Line from '../component/line'
+import {RootHUD} from "../../../../utils/progressHUD"
 
 //musicData
-import mockList from '../../../assets/data/musicList1'
+import mockList from '../../../../assets/data/musicList1'
+import {getByIdPlayerLyric} from "../../../../utils/network/fetch/apiHelper";
 
 class musicPlayer extends Component {
     constructor(props) {
@@ -42,6 +48,11 @@ class musicPlayer extends Component {
             duration: 0.00,                     //总时间
             slideValue: 0.00,                   //进度条
             currentTime: 0.00,                  //进行时间
+
+            lyric: '',                          //未处理的歌词
+            lyricArr: [],                       //已处理的歌词
+            currentLrc: '',                     // 当前歌词
+
             currentIndex: this.props.music_id,  //子ID-选中ID
             playMode: 0,                        //播放方式
             imgRotate: new Animated.Value(0),   //开始 初始化0
@@ -63,8 +74,15 @@ class musicPlayer extends Component {
     }
 
     componentWillMount() {
-
+        getByIdPlayerLyric((r)=>{
+            alert(JSON.stringify(r))
+            if (r.code === 200){
+                //r.lrc
+            }
+        },{id:this.props.id,os:'ios',lv:-1,kv:-1,tv:-1});
     }
+
+
 
     //播放方式
     playMode(playMode) {
@@ -219,7 +237,7 @@ class musicPlayer extends Component {
             '不看下右下角的列表吗?\n退出去音乐也停止播放了呦!',
             [
                 {text: '再听听', onPress: () => '再听听', style: 'cancel'},
-                {text: '退出', onPress: () => {Actions.popTo('main')}},
+                {text: '退出', onPress: () => {Actions.pop()}},
             ],
             { cancelable: false }
         )
@@ -234,6 +252,8 @@ class musicPlayer extends Component {
          **/
         let data = this.props;
 
+        // console.log('=-=-=-=-=-=-==-=-=-'+JSON.stringify(data));
+
         //动画范围 * 360度旋转一周(0-360：为真转)
         let interpolatedAnimation = this.state.imgRotate.interpolate({
                 inputRange: [0, 1],
@@ -245,14 +265,18 @@ class musicPlayer extends Component {
 
         let musicInfo = mockList.list[this.state.currentIndex] || {};
 
+        const {currentLrc, lyricArr } = this.state;
+
         return (
             <ImageBackground
                 blurRadius={66}
-                source={{uri: data.cover?data.cover:musicInfo.cover}}
+                source={{uri: data.isListData?data.cover:musicInfo.cover}}
                 style={{flex:1, alignItems: 'center'}}
+                onLoadStart={()=>{RootHUD.show()}}
+                onLoadEnd={()=>{RootHUD.hidden()}}
             >
                 {/*导航条*/}
-                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} textRoll={true} title={data.xsong_name?data.xsong_name:musicInfo.xsong_name}/>
+                <Navbar backCallback={()=>{this.isPop()}} centerColor={commonStyle.transparent} textColor={commonStyle.white} textRoll={true} title={data.isListData?data.xsong_name:musicInfo.xsong_name}/>
                 {/*分割线 line*/}
                 <Line/>
                 {/*中部 - 旋转*/}
@@ -272,10 +296,10 @@ class musicPlayer extends Component {
                                         contentContainerStyle={{alignItems: commonStyle.center}}  //alignItems: 'center',paddingTop: '30%', paddingBottom: '30%'
                                         ref={lyricScroll => this.lyricScroll = lyricScroll}
                                     >
-                                        <Text style={{marginTop: 260, fontSize: 12, color: commonStyle.white}}>这里是歌词，正在实现此功能</Text>
-                                        {/*{lyricArr.map((v, i) => (*/}
-                                        {/*<Normal color={v === currentLrc ?commonStyle.main?commonStyle.main:'#0882ff':'#fff'} key={i} style={{paddingTop: 5, paddingBottom: 5}}>{v.replace(/\[.*\]/g, '')}</Normal>*/}
-                                        {/*))}*/}
+                                        {/*<Text style={{marginTop: 260, fontSize: 12, color: commonStyle.white}}>这里是歌词，正在实现此功能</Text>*/}
+                                        {lyricArr.map((v, i) => (
+                                            <Normal color={v === currentLrc ?commonStyle.main?commonStyle.main:'#0882ff':'#fff'} key={i} style={{paddingTop: 5, paddingBottom: 5}}>{v.replace(/\[.*\]/g, '')}</Normal>
+                                        ))}
                                     </ScrollView>
                                 </View>)
                             ://胶片
@@ -288,10 +312,10 @@ class musicPlayer extends Component {
                                     alignItems: 'center',
                                     zIndex: 1
                                 }}>
-                                    <Image source={require('../../../assets/images/music_needle-ip6.png')}
+                                    <Image source={require('../../../../assets/images/music_needle-ip6.png')}
                                            style={{width: 100, height: 140}}/>
                                 </View>
-                                <ImageBackground source={require('../../../assets/images/music_disc-ip6.png')} style={{
+                                <ImageBackground source={require('../../../../assets/images/music_disc-ip6.png')} style={{
                                     width: deviceInfo.deviceWidth - 40,
                                     height: deviceInfo.deviceWidth - 40,
                                     justifyContent: 'center',
@@ -299,7 +323,7 @@ class musicPlayer extends Component {
                                 }}>
                                     <Animated.Image
                                         //source={{uri: detail.al && detail.al.picUrl + '?param=200y200'}}
-                                        source={{uri: data.cover?data.cover:musicInfo.cover}}
+                                        source={{uri: data.isListData?data.cover:musicInfo.cover}}
                                         style={[{
                                             width: deviceInfo.deviceWidth - 152,
                                             height: deviceInfo.deviceWidth - 152,
@@ -338,7 +362,13 @@ class musicPlayer extends Component {
                     <View style={styles.footerBtn}>
                         {/*播放方式*/}
                         <TouchableOpacity
-                            onPress={() =>{this.playMode(this.state.playMode)}}
+                            onPress={() =>{
+                                if (!data.isListData){
+                                    this.playMode(this.state.playMode);
+                                } else {
+                                    Toast.show('列表播放才有播放模式呦')
+                                }
+                            }}
                             style={styles.playBtn}
                         >
                             <Icon name={this.state.playModeIcon} size={30} color={commonStyle.white}/>
@@ -346,14 +376,18 @@ class musicPlayer extends Component {
                         {/*上一首*/}
                         <TouchableOpacity
                             onPress={() =>{
-                                //切换上一首并播放
-                                this.preSong(this.state.currentIndex - 1);
-                                //延迟播放
-                                setTimeout(()=>{
-                                    if(this.state.paused){
-                                        this.playing();
-                                    }
-                                },300);
+                                if (!data.isListData){
+                                    //切换上一首并播放
+                                    this.preSong(this.state.currentIndex - 1);
+                                    //延迟播放
+                                    setTimeout(()=>{
+                                        if(this.state.paused){
+                                            this.playing();
+                                        }
+                                    },300);
+                                } else {
+                                    Toast.show('列表播放才有上一首呦')
+                                }
                             }}
                             style={styles.playBtn}
                         >
@@ -369,14 +403,18 @@ class musicPlayer extends Component {
                         {/*下一首*/}
                         <TouchableOpacity
                             onPress={() =>{
-                                //切换下一首并播放
-                                this.nextSong(this.state.currentIndex + 1);
-                                //延迟播放
-                                setTimeout(()=>{
-                                    if(this.state.paused){
-                                        this.playing();
-                                    }
-                                },300);
+                                if (!data.isListData){
+                                    //切换下一首并播放
+                                    this.nextSong(this.state.currentIndex + 1);
+                                    //延迟播放
+                                    setTimeout(()=>{
+                                        if(this.state.paused){
+                                            this.playing();
+                                        }
+                                    },300);
+                                } else {
+                                    Toast.show('列表播放才有下一首呦')
+                                }
                             }}
                             style={styles.playBtn}
                         >
@@ -384,7 +422,13 @@ class musicPlayer extends Component {
                         </TouchableOpacity>
                         {/*播放列表*/}
                         <TouchableOpacity
-                            onPress={() =>{this.showModal()}}
+                            onPress={() =>{
+                                if (!data.isListData){
+                                    this.showModal()
+                                } else {
+                                    Toast.show('从列表点击才有列表展示呦')
+                                }
+                            }}
                             style={styles.playBtn}
                         >
                             <Icon name="ios-list-outline" size={30} color={commonStyle.white}/>
@@ -393,7 +437,7 @@ class musicPlayer extends Component {
                     {/*播放器组件*/}
                     <Video
                         ref={video => this.player = video}
-                        source={{uri: data.url?data.url:musicInfo.url}}
+                        source={{uri: data.isListData?data.url:musicInfo.url}}
                         volume={1.0}
                         paused={this.state.paused}
                         onLoadStart={this.loadStart}
@@ -467,6 +511,26 @@ class musicPlayer extends Component {
             </ImageBackground>
         );
     }
+
+    //渲染之后刷新 UI
+    componentWillReceiveProps(nextProps) {
+        const { currentPlay } = this.props;
+        const nextCurrentPlay = nextProps.currentPlay;
+        const { lyric, lyricArr } = this.state;
+        if (currentPlay.currentTime !== nextCurrentPlay.currentTime) {
+            if (lyric) {    // 匹配当前歌词，并且逐行上滑
+                console.log(lyric.match(new RegExp(`\\[${nextCurrentPlay.currentTime}\\.\\d+\\].*`, 'g')));
+                const currentLrc = lyric.match(new RegExp(`\\[${nextCurrentPlay.currentTime}\\.\\d+\\].*`, 'g'));
+                if (currentLrc) {
+                    this.setState({currentLrc: currentLrc[0]});
+                    this.setState({
+                        lyricScroll: this.state.lyricScroll += 20,
+                    }, () => this.lyricScroll && this.lyricScroll.scrollTo({x: 0, y: lyricArr.findIndex(v => v === currentLrc[0]) * 20, animated: true}))
+                }
+            }
+        }
+    }
+
     //ScrollView回调
     handleScrollTo = p => {
         if (this.scrollViewRef) {

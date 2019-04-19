@@ -35,7 +35,7 @@ import WebView from '../components/common/webView'
 /**============首页============**/
 
 /**============音乐============**/
-import MusicPlayer from '../components/pages/music/musicPlayer'
+import MusicPlayer from '../components/pages/music/vidoUtil/musicPlayer'
 import SearchMusic from '../components/pages/music/searchMusic'
 /**============电影============**/
 import MovieDetail from '../components/pages/movie/movieComment/movieDetail'

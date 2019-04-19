@@ -19,7 +19,7 @@ const {BaseUrl} = apiConfig;
  * @param data
  */
 //获取我的喜欢音乐歌单
-export function getMyLikePlaylist(callback,data){     //====//   获取我的喜欢音乐歌单
+export function getMyLikePlaylist(callback,data){                     //====//   获取我的喜欢音乐歌单
     zhPost({
         url:`${BaseUrl}/v3/playlist/detail`,
         callback,
@@ -35,8 +35,18 @@ export function getByIdPlayerUrl(callback,data) {                      //====// 
         data
     })
 }
+
+//根据ID获取歌词
+export function getByIdPlayerLyric(callback,data) {                      //====//    根据ID获取歌词
+    zhPost({
+        url:`${BaseUrl}/song/lyric`,
+        callback,
+        data
+    })
+}
+
 //云搜索歌曲
-export function qCloudsearch(callback,data) {                      //====//    云搜索歌曲
+export function qCloudsearch(callback,data) {                           //====//    云搜索歌曲
     zhPost({
         url:`${BaseUrl}/cloudsearch/pc`,
         callback,

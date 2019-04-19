@@ -10,7 +10,7 @@ import deviceInfo from "../../../../utils/deviceInfo"
 import {BaseComponent} from '../../../../components/base/baseComponent'
 import {commonStyle} from "../../../../utils/commonStyle"
 import {Toast} from "../../../../utils/toast"
-import {qCloudsearch,getByIdPlayerUrl} from "../../../../utils/network/fetch/apiHelper"
+import {qCloudsearch,getByIdPlayerUrl,getByIdPlayerLyric} from "../../../../utils/network/fetch/apiHelper"
 import Modal from "react-native-modal";
 import {setUserMusicInfo,userInfo} from "../../../../utils/userInfo"
 
@@ -44,11 +44,12 @@ class SearchMusic extends BaseComponent {
         }
     }
 
+    //搜索
     searchMusic(musicName){
         this.setState({show:true});
         qCloudsearch((r)=>{
             if (r.code === 200){
-                this.setState({musicList:r.result.songs})
+                this.setState({musicList:r.result.songs});
             }else {
                 Toast.show('呀！出错了')
             }
@@ -97,17 +98,16 @@ class SearchMusic extends BaseComponent {
                                         activeOpacity={0.8}
                                         style={styles.view2_1}
                                         onPress={()=>{
-                                            Actions.musicPlayer({music_id:data.music_id,xsong_name:data.xsong_name,xsinger_name:data.xsinger_name,cover:data.cover,url:data.url});
+                                            // alert(JSON.stringify(data))
+                                            Actions.musicPlayer({isListData:true,music_id:data.music_id,xsong_name:data.xsong_name,xsinger_name:data.xsinger_name,cover:data.cover,url:data.url});
                                         }}
                                     >
                                         <Text style={styles.textWarp}>{data.xsong_name} - {data.xsinger_name}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )
-                        }) :null
+                        }):null
                     }
-
-
                 </View>
 
                 {/*列表弹窗*/}
@@ -143,7 +143,8 @@ class SearchMusic extends BaseComponent {
                                                 setTimeout(()=>{
                                                     getByIdPlayerUrl((r)=>{
                                                         if(r.code === 200){
-                                                            Actions.musicPlayer({music_id:data.id,xsong_name:data.name,xsinger_name:data.ar[0].name,cover:data.al.picUrl,url:r.data[0].url});
+                                                            Actions.musicPlayer({isListData:true,music_id:data.id,xsong_name:data.name,xsinger_name:data.ar[0].name,cover:data.al.picUrl,url:r.data[0].url});
+                                                            //存储搜索记录
                                                             setUserMusicInfo(data.id,data.name,data.ar[0].name,data.al.picUrl,r.data[0].url);
                                                         }else {
                                                             Toast.show('呀！没网了')
