@@ -9,13 +9,14 @@ import {commonStyle} from '../../../utils/commonStyle'
 class Swiper extends Component {
 
     render() {
+        let {viewStyle,centerMethod} = this.props;
         return (
-            <View style={[styles.container,this.props.viewStyle]}>
+            <View style={[styles.container,viewStyle]}>
                 <_Swiper
                     {...this.props}                         //返回此组件所有属性（引用此组件可以使用此组件所有属性）
                     showsButtons={false}                    //左右控制按钮
                     autoplay={true}                         //开启自动轮播
-                    autoplayTimeout={6}                     //轮播间隔时间（切换时间）2秒
+                    autoplayTimeout={6}                     //轮播间隔时间（切换时间）6秒
                     showsPagination={true}                  //为false不显示下方圆点
                     dot={<View style={{                     //未选中的圆点样式
                         backgroundColor: commonStyle.twoTranslucent,
@@ -38,7 +39,7 @@ class Swiper extends Component {
                         marginBottom: 5,
                     }}/>}
                 >
-                    {this.props.centerMethod}
+                    {centerMethod}
                 </_Swiper>
             </View>
         )

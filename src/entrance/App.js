@@ -243,7 +243,7 @@ class App extends Component {
                 <Router
                     scenes={scenes}
                     createReducer={reducerCreate}
-                    tintColor='white'
+                    tintColor={'white'}
                     getSceneStyle={getSceneStyle}
                 />
                 <MessageBar/>

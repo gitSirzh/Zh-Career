@@ -99,7 +99,16 @@ class SearchMusic extends BaseComponent {
                                         style={styles.view2_1}
                                         onPress={()=>{
                                             // alert(JSON.stringify(data))
-                                            Actions.musicPlayer({isListData:true,music_id:data.music_id,xsong_name:data.xsong_name,xsinger_name:data.xsinger_name,cover:data.cover,url:data.url});
+                                            // Actions.musicPlayer({isListData:true,music_id:data.music_id,xsong_name:data.xsong_name,xsinger_name:data.xsinger_name,cover:data.cover,url:data.url});
+                                            getByIdPlayerUrl((r)=>{
+                                                if(r.code === 200){
+                                                    Actions.musicPlayer({isListData:true,music_id:data.id,xsong_name:data.name,xsinger_name:data.ar[0].name,cover:data.al.picUrl,url:r.data[0].url});
+                                                    //存储搜索记录
+                                                    setUserMusicInfo(data.id,data.name,data.ar[0].name,data.al.picUrl,r.data[0].url);
+                                                }else {
+                                                    Toast.show('呀！没网了')
+                                                }
+                                            },{ids:`['${data.music_id}']`,br:320000});
                                         }}
                                     >
                                         <Text style={styles.textWarp}>{data.xsong_name} - {data.xsinger_name}</Text>
