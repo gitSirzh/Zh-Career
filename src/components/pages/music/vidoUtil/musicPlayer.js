@@ -75,7 +75,7 @@ class musicPlayer extends Component {
 
     componentWillMount() {
         getByIdPlayerLyric((r)=>{
-            alert(JSON.stringify(r))
+            //alert(JSON.stringify(r))
             if (r.code === 200){
                 //r.lrc
             }
@@ -232,15 +232,23 @@ class musicPlayer extends Component {
 
     //退出事件
     isPop(){
-        Alert.alert(
-            '恒果提示',
-            '不看下右下角的列表吗?\n退出去音乐也停止播放了呦!',
-            [
-                {text: '再听听', onPress: () => '再听听', style: 'cancel'},
-                {text: '退出', onPress: () => {Actions.pop()}},
-            ],
-            { cancelable: false }
-        )
+        if (!global.isShowAlert){
+            Alert.alert(
+                '恒果提示',
+                '不看下右下角的列表吗?\n退出去音乐也停止播放了呦!',
+                [
+                    {text: '再听听', onPress: () => '再听听', style: 'cancel'},
+                    {text: '退出', onPress: () => {Actions.pop()}},
+                    {text: '退出并且不再提示', onPress: () => {
+                            global.isShowAlert = true;
+                            Actions.pop()
+                        }},
+                ],
+                { cancelable: false }
+            )
+        }else {
+            Actions.pop()
+        }
     }
 
     render() {

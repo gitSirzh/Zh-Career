@@ -98,13 +98,10 @@ class SearchMusic extends BaseComponent {
                                         activeOpacity={0.8}
                                         style={styles.view2_1}
                                         onPress={()=>{
-                                            // alert(JSON.stringify(data))
-                                            // Actions.musicPlayer({isListData:true,music_id:data.music_id,xsong_name:data.xsong_name,xsinger_name:data.xsinger_name,cover:data.cover,url:data.url});
+                                            //通过ID查询歌曲播放地址
                                             getByIdPlayerUrl((r)=>{
                                                 if(r.code === 200){
-                                                    Actions.musicPlayer({isListData:true,music_id:data.id,xsong_name:data.name,xsinger_name:data.ar[0].name,cover:data.al.picUrl,url:r.data[0].url});
-                                                    //存储搜索记录
-                                                    setUserMusicInfo(data.id,data.name,data.ar[0].name,data.al.picUrl,r.data[0].url);
+                                                    Actions.musicPlayer({isListData:true,music_id:data.music_id,xsong_name:data.xsong_name,xsinger_name:data.xsinger_name,cover:data.cover,url:r.data[0].url});
                                                 }else {
                                                     Toast.show('呀！没网了')
                                                 }
@@ -141,7 +138,7 @@ class SearchMusic extends BaseComponent {
                             <ScrollView
                                 style={{width:deviceInfo.deviceWidth}}
                             >
-                                {this.state.musicList.map((data,index)=>{
+                                {this.state.musicList ? this.state.musicList.map((data,index)=>{
                                     return(
                                         <TouchableOpacity
                                             key={index}
@@ -167,7 +164,11 @@ class SearchMusic extends BaseComponent {
                                             </View>
                                         </TouchableOpacity>
                                     )
-                                })}
+                                }):
+                                    <View style={{flex:1,alignItems: commonStyle.center,justifyContent: commonStyle.center}}>
+                                        <Text style={{fontSize:14,color: commonStyle.navThemeColor}}>抱歉没查找到对应歌曲</Text>
+                                    </View>
+                                }
                             </ScrollView>
 
                         </View>

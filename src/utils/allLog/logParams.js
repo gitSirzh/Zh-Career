@@ -3,7 +3,7 @@
  */
 
 import {Platform} from 'react-native'
-// import DeviceInfo from 'react-native-device-info'
+// import DeviceInfo from 'react-native-device-info-lower-version-android-jszh'
 const defaultValue = {
     sourceId: Platform.OS === 'ios' ? 0 : 1,
     channelID: 0,
