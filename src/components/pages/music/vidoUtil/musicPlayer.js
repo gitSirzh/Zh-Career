@@ -34,10 +34,12 @@ import {Actions} from "react-native-router-flux"
 import {formatTime} from "../../../../utils/formatTime"
 import Line from '../component/line'
 import {RootHUD} from "../../../../utils/progressHUD"
+import {send} from "../../../../utils/eventDispatcher"
 
 //musicData
 import mockList from '../../../../assets/data/musicList1'
-import {getByIdPlayerLyric} from "../../../../utils/network/fetch/apiHelper";
+import {getByIdPlayerLyric} from "../../../../utils/network/fetch/apiHelper"
+
 
 class musicPlayer extends Component {
     constructor(props) {
@@ -232,6 +234,9 @@ class musicPlayer extends Component {
 
     //退出事件
     isPop(){
+        //发送触发历史记录渲染
+        send('renderHistorical');
+        //是否展示弹窗
         if (!global.isShowAlert){
             Alert.alert(
                 '恒果提示',

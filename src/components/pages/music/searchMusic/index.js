@@ -13,6 +13,7 @@ import {Toast} from "../../../../utils/toast"
 import {qCloudsearch,getByIdPlayerUrl,getByIdPlayerLyric} from "../../../../utils/network/fetch/apiHelper"
 import Modal from "react-native-modal";
 import {setUserMusicInfo,userInfo} from "../../../../utils/userInfo"
+import {listen} from "../../../../utils/eventDispatcher"
 
 class SearchMusic extends BaseComponent {
 
@@ -42,6 +43,10 @@ class SearchMusic extends BaseComponent {
         if (userInfo){
             this.setState({historical:userInfo.musicData})
         }
+
+        listen('renderHistorical',()=>{
+            this.setState({historical:userInfo.musicData})
+        })
     }
 
     //搜索
